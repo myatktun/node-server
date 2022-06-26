@@ -7,6 +7,10 @@ const BookSchema = new mongoose.Schema({
     default: 'Unknown'
   },
   isbn: Number,
+  olid: {
+    type: String,
+    default: 'unknown'
+  },
   read: {
     type: Boolean,
     default: false

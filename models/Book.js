@@ -4,9 +4,12 @@ const BookSchema = new mongoose.Schema({
   book: String,
   author: {
     type: String,
-    default: 'Unknown'
+    default: 'unknown'
   },
-  isbn: Number,
+  isbn: {
+    type: Number,
+    default: 0
+  },
   olid: {
     type: String,
     default: 'unknown'
@@ -14,6 +17,10 @@ const BookSchema = new mongoose.Schema({
   read: {
     type: Boolean,
     default: false
+  },
+  category: {
+    type: String,
+    default: 'unknown'
   }
 })
 

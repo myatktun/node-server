@@ -1,39 +1,80 @@
 const Books = require('../models/Book')
 
+const createQueryObject = async (search, book) => {
+  let queryObject = []
+  if (search) {
+    search = search.replace(/[+,]/g, '\\W')
+    queryObject.push({ book: { $regex: search, $options: 'i' } })
+    queryObject.push({ author: { $regex: search, $options: 'i' } })
+    if (Number(search)) {
+      queryObject.push({ isbn: Number(search) })
+    }
+  }
+  if (book) {
+    book = book.replace(/[+.]/g, '\\W')
+    queryObject.push({ book: { $regex: `^${book}`, $options: 'i' } })
+  }
+  return queryObject
+}
+
+const getSimilarBooks = async (result) => {
+  const { book, category } = (await result.clone())[0]
+  const similarQuery = [{ book: { $ne: `${book}` } }, { category: { $eq: `${category}` } }]
+  const similarBooks = await Books.find({ $and: similarQuery })
+  return similarBooks
+}
+
+const sortBooks = async (result, sort) => {
+  const sortList = sort.split(',').join(' ')
+  result = result.sort(sortList)
+  return [true, result]
+}
+
+const calcTotalBooks = async (result, limit, resultLength) => {
+  const allBooks = await Books.countDocuments()
+  const totalBooks = await result.clone().countDocuments()
+  const totalPages = Math.ceil(totalBooks / limit)
+  if (!resultLength) {
+    let latest = await Books.find()
+    latest = latest[allBooks - 1]
+    return [totalBooks, totalPages, latest]
+  }
+  return [totalBooks, totalPages]
+
+}
+
+const calcMisc = async (pageNum, limitNum) => {
+  const page = Number(pageNum) || 1
+  const limit = Number(limitNum) || 20
+  const skip = (page - 1) * limit
+  return [page, limit, skip]
+}
+
 const getBooks = async (req, res) => {
   try {
 
-    const { search, sort } = req.query
-    let query = []
-    if (search) {
-      query.push({ book: { $regex: search, $options: 'i' } })
-      query.push({ author: { $regex: search, $options: 'i' } })
-      if (Number(search)) {
-        query.push({ isbn: Number(search) })
-      }
-    }
-    let result = query.length !== 0 ? Books.find({ $or: query }) : Books.find()
+    const queryObject = await createQueryObject(req.query.search, req.query.book)
 
-    if (sort) {
-      const sortList = sort.split(',').join(' ')
-      result = result.sort(sortList)
-    }
+    let result = queryObject.length !== 0 ? Books.find({ $or: queryObject }) : Books.find()
 
-    const page = Number(req.query.page) || 1
-    const limit = Number(req.query.limit) || 20
-    const skip = (page - 1) * limit
+    result = req.query.sort ? (await sortBooks(result, req.query.sort))[1] : result
 
-    const allBooks = await Books.countDocuments()
-    let latest = await Books.find()
-    latest = latest[allBooks - 1]
-    const totalBooks = await result.clone().countDocuments()
-    const totalPages = Math.ceil(totalBooks / limit)
+    const similarBooks = req.query.book ? await getSimilarBooks(result) : undefined
+
+    const [page, limit, skip] = await calcMisc(req.query.page, req.query.limit)
+
+    const [totalBooks, totalPages, latest] = await calcTotalBooks(result, limit, queryObject.length)
 
     result = result.skip(skip).limit(limit)
     const books = await result
 
     if (books.length > 0) {
-      return res.status(200).send({ total: totalBooks, total_pages: totalPages, page: page, limit_per_page: limit, results_in_page: books.length, results: books, latest: latest })
+      return res.status(200).send({
+        total: totalBooks, total_pages: totalPages,
+        page: page, limit_per_page: limit,
+        results_in_page: books.length, results: books,
+        similar: similarBooks, latest: latest
+      })
     }
     res.status(200).send({ total: totalBooks, results_in_page: books.length, msg: 'No books found' })
 

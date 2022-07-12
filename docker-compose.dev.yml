@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+
+  node-server:
+    build:
+      context: .
+      args:
+        NODE_ENV: development
+    environment:
+      - PORT=5000
+      - NODE_ENV=development
+      - MONGO_USER=${MONGO_USER}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+    volumes:
+      - ./:/app:ro
+    command: yarn dev
+
+  mongodb:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}

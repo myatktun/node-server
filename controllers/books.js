@@ -3,16 +3,16 @@ const Books = require('../models/Book')
 const createQueryObject = async (search, book) => {
   let queryObject = []
   if (search) {
-    search = search.replace(/[+,]/g, '\\W')
+    search = search.replace(/[+]/g, '\\W')
     queryObject.push({ book: { $regex: search, $options: 'i' } })
     queryObject.push({ author: { $regex: search, $options: 'i' } })
+    queryObject.push({ category: { $regex: search, $options: 'i' } })
     if (Number(search)) {
       queryObject.push({ isbn: Number(search) })
     }
   }
   if (book) {
-    book = book.replace(/[+.]/g, '\\W')
-    queryObject.push({ book: { $regex: `^${book}`, $options: 'i' } })
+    queryObject.push({ book: { $eq: `${book}` } })
   }
   return queryObject
 }
@@ -31,12 +31,10 @@ const sortBooks = async (result, sort) => {
 }
 
 const calcTotalBooks = async (result, limit, resultLength) => {
-  const allBooks = await Books.countDocuments()
   const totalBooks = await result.clone().countDocuments()
   const totalPages = Math.ceil(totalBooks / limit)
   if (!resultLength) {
-    let latest = await Books.find()
-    latest = latest[allBooks - 1]
+    const latest = (await Books.find().sort({ "dateAdded": -1 }))[0]
     return [totalBooks, totalPages, latest]
   }
   return [totalBooks, totalPages]

@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-require('dotenv').config({ path: './.env.test.local' })
+require('dotenv').config()
 
 const connectDB = require('./db/connect')
 const routes = require('./routes/routes')

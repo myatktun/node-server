@@ -15,12 +15,18 @@ const BookSchema = new mongoose.Schema({
     default: 'unknown'
   },
   read: {
-    type: Boolean,
-    default: false
+    type: String,
+    enum: {
+      values: ['new', 'reading', 'finished'],
+      message: '{VALUE} is not supported'
+    },
+    default: 'new'
+  },
+  dateAdded: {
+    type: String,
   },
   category: {
-    type: String,
-    default: 'unknown'
+    type: String
   }
 })
 

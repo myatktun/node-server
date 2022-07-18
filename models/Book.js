@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const BookSchema = new mongoose.Schema({
   book: String,
@@ -30,4 +30,6 @@ const BookSchema = new mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('Books', BookSchema)
+// BookSchema.index({ book: "text", author: "text", isbn: "text" })
+
+export default mongoose.model('Books', BookSchema)

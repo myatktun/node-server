@@ -1,6 +1,6 @@
-const Notes = require('../models/Note')
+import Notes from '../models/Note.js'
 
-const getNotes = async (req, res) => {
+export const getNotes = async (req, res) => {
   try {
 
     const { sort } = req.query
@@ -31,7 +31,7 @@ const getNotes = async (req, res) => {
   }
 }
 
-const searchNotes = async (req, res) => {
+export const searchNotes = async (req, res) => {
   try {
     const { name, sort } = req.query
     const queryObject = {}
@@ -63,9 +63,4 @@ const searchNotes = async (req, res) => {
     res.status(404).send({ msg: 'Error not found' })
     console.log(error)
   }
-}
-
-module.exports = {
-  getNotes,
-  searchNotes
 }

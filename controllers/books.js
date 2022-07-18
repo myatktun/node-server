@@ -1,4 +1,4 @@
-const Books = require('../models/Book')
+import Books from '../models/Book.js'
 
 const createQueryObject = async (search, book) => {
   let queryObject = []
@@ -30,7 +30,7 @@ const sortBooks = async (result, sort) => {
   return [true, result]
 }
 
-const calcTotalBooks = async (result, limit, resultLength) => {
+const calcTotalBooks = async (result, limit, resultLength = 0) => {
   const totalBooks = await result.clone().countDocuments()
   const totalPages = Math.ceil(totalBooks / limit)
   if (!resultLength) {
@@ -48,7 +48,7 @@ const calcMisc = async (pageNum, limitNum) => {
   return [page, limit, skip]
 }
 
-const getBooks = async (req, res) => {
+export const getBooks = async (req, res) => {
   try {
 
     const queryObject = await createQueryObject(req.query.search, req.query.book)
@@ -66,7 +66,7 @@ const getBooks = async (req, res) => {
     result = result.skip(skip).limit(limit)
     const books = await result
 
-    if (books.length > 0) {
+    if (books.length) {
       return res.status(200).send({
         total: totalBooks, total_pages: totalPages,
         page: page, limit_per_page: limit,
@@ -82,6 +82,75 @@ const getBooks = async (req, res) => {
   }
 }
 
-module.exports = {
-  getBooks
+export const getBook = async (req, res) => {
+  try {
+    const { book } = req.params
+
+    const result = await Books.findOne({ book: book })
+
+    if (result) {
+      const similarBooks = await getSimilarBooks(result)
+      return res.status(200).send({ results: [result], similar: similarBooks })
+    }
+    res.status(404).send({ msg: 'Something went wrong' })
+  } catch (error) {
+    res.status(404).send({ msg: 'Error not found' })
+    console.log(error)
+  }
+}
+
+const queryDB = async (value, limit, skip) => {
+
+  return await Books.aggregate([
+    {
+      $group: {
+        _id: `$${value}`,
+        books: { $addToSet: "$book" }
+      }
+    },
+    {
+      $sort: { _id: 1 }
+    },
+    {
+      $facet: {
+        total: [
+          {
+            $count: "total"
+          }
+        ],
+        data: [
+          {
+            $skip: skip
+          },
+          {
+            $limit: limit
+          }
+        ]
+      }
+    }
+  ])
+}
+
+export const getAuthors = async (req, res) => {
+  try {
+    const [page, limit, skip] = await calcMisc(req.query.page, req.query.limit)
+
+    const [authors] = await queryDB("author", limit, skip)
+
+    const { total, data: author } = authors
+    const totalBooks = total[0].total
+    const totalPages = Math.ceil(totalBooks / limit)
+    if (authors) {
+      return res.status(200).send({
+        total: totalBooks, total_pages: totalPages,
+        page: page, limit_per_page: limit,
+        results_in_page: author.length, results: author,
+      })
+    }
+    res.status(404).send({ total: totalBooks, results_in_page: books.length, msg: 'No books found' })
+
+  } catch (error) {
+    res.status(404).send({ msg: 'Error not found' })
+    console.log(error)
+  }
 }

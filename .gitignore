@@ -3,5 +3,10 @@
 .env.*
 .env
 
+*.json
+!package.json
+
 /db/*
 !/db/connect.js
+
+*.old.js

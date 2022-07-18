@@ -1,12 +1,11 @@
-const express = require('express')
+import express from 'express'
+import cors from 'cors'
+
+import connectDB from './db/connect.js'
+import routes from './routes/routes.js'
+
 const app = express()
-const cors = require('cors')
-require('dotenv').config()
-
-const connectDB = require('./db/connect')
-const routes = require('./routes/routes')
-
-const PORT = 5000
+const PORT = process.env.PORT || 5000
 
 app.use(cors())
 app.use(express.json())

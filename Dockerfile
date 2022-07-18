@@ -1,17 +1,12 @@
-FROM node:16-alpine
-
+FROM node:16.16-alpine AS base
 WORKDIR /app
 COPY package.json yarn.lock ./
 
-ARG NODE_ENV
-RUN if [ "$NODE_ENV" = "development" ]; \
-        then yarn install; \
-        else yarn install --production=true; \
-        fi
+FROM base as dev
+RUN yarn install && yarn cache clean
+CMD ["yarn", "dev"]
 
+FROM base AS prod
+RUN yarn install --production && yarn cache clean
 COPY . .
-
-ENV PORT 5000
-EXPOSE $PORT
-
-CMD ["node", "server.js"]
+CMD ["node", "/app/server.js"]

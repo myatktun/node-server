@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose'
 
-const notesSchema = new mongoose.Schema({
+const NotesSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'file name must be provided']
@@ -10,4 +10,4 @@ const notesSchema = new mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('Notes', notesSchema)
+export default mongoose.model('Notes', NotesSchema)

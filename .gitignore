@@ -6,7 +6,8 @@
 *.json
 !package.json
 
-/db/*
-!/db/connect.js
+/src/api/db/*
+!/src/api/db/connect.js
+!/src/api/db/bookData.json
 
 *.old.js

@@ -18,7 +18,7 @@ const createQueryObject = async (search, book) => {
 }
 
 const getSimilarBooks = async (result) => {
-  const { book, category } = (await result.clone())[0]
+  const { book, category } = result
   const similarQuery = [{ book: { $ne: `${book}` } }, { category: { $eq: `${category}` } }]
   const similarBooks = await Books.find({ $and: similarQuery })
   return similarBooks
@@ -57,8 +57,6 @@ export const getBooks = async (req, res) => {
 
     result = req.query.sort ? (await sortBooks(result, req.query.sort))[1] : result
 
-    const similarBooks = req.query.book ? await getSimilarBooks(result) : undefined
-
     const [page, limit, skip] = await calcMisc(req.query.page, req.query.limit)
 
     const [totalBooks, totalPages, latest] = await calcTotalBooks(result, limit, queryObject.length)
@@ -71,10 +69,10 @@ export const getBooks = async (req, res) => {
         total: totalBooks, total_pages: totalPages,
         page: page, limit_per_page: limit,
         results_in_page: books.length, results: books,
-        similar: similarBooks, latest: latest
+        latest: latest
       })
     }
-    res.status(200).send({ total: totalBooks, results_in_page: books.length, msg: 'No books found' })
+    res.status(404).send({ total: totalBooks, results_in_page: books.length, msg: 'No books found' })
 
   } catch (error) {
     res.status(404).send({ msg: 'Error not found' })
@@ -135,19 +133,19 @@ export const getAuthors = async (req, res) => {
   try {
     const [page, limit, skip] = await calcMisc(req.query.page, req.query.limit)
 
-    const [authors] = await queryDB("author", limit, skip)
+    const [result] = await queryDB("author", limit, skip)
 
-    const { total, data: author } = authors
-    const totalBooks = total[0].total
-    const totalPages = Math.ceil(totalBooks / limit)
-    if (authors) {
+    const { total, data: authors } = result
+    const totalAuthors = total[0].total
+    const totalPages = Math.ceil(totalAuthors / limit)
+    if (authors.length) {
       return res.status(200).send({
-        total: totalBooks, total_pages: totalPages,
+        total: totalAuthors, total_pages: totalPages,
         page: page, limit_per_page: limit,
-        results_in_page: author.length, results: author,
+        results_in_page: authors.length, results: authors,
       })
     }
-    res.status(404).send({ total: totalBooks, results_in_page: books.length, msg: 'No books found' })
+    res.status(404).send({ total: totalAuthors, results_in_page: authors.length, msg: 'No authors found' })
 
   } catch (error) {
     res.status(404).send({ msg: 'Error not found' })

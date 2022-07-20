@@ -1,8 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 
-import connectDB from './db/connect.js'
-import routes from './routes/routes.js'
+import connectDB from './api/db/connect.js'
+import routes from './api/routes/routes.js'
 
 const app = express()
 const PORT = process.env.PORT || 5000

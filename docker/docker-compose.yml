@@ -2,28 +2,30 @@ version: "3.9"
 
 services:
   node-server:
-    image: node-server:prod
+    image: node-server:dev
     build:
-      context: .
-      target: prod
+      context: ../
+      dockerfile: docker/Dockerfile
+      target: dev
     container_name: node-server
     environment:
       - PORT=5000
       - NODE_ENV=development
-      - MONGO_USER=${MONGO_USER}
-      - MONGO_PASSWORD=${MONGO_PASSWORD}
     ports:
       - "5000:5000"
     networks:
       - my_network
     volumes:
-      - ./:/app:ro
+      - ../:/app:ro
+      - /app/node_modules
     depends_on:
       - mongodb
 
   mongodb:
     image: mongo
     container_name: mongodb
+    ports:
+      - "27017:27017"
     networks:
       - my_network
     environment:

@@ -9,4 +9,4 @@ CMD ["yarn", "dev"]
 FROM base AS prod
 RUN yarn install --production && yarn cache clean
 COPY . .
-CMD ["node", "/app/server.js"]
+CMD ["node", "/app/src/server.js"]

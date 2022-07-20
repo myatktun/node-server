@@ -1,0 +1,321 @@
+{
+	"info": {
+		"_postman_id": "5a25feea-3831-4258-a447-0770727a727b",
+		"name": "node-server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getBooks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response contains results\", function () {",
+							"    pm.expect(jsonData.results.length).to.gt(0);",
+							"});",
+							"",
+							"pm.test(\"Response contains latest\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"latest\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/books/?sort=category&page=6",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"books",
+						""
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "category"
+						},
+						{
+							"key": "limit",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "search",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response contains results\", function () {",
+							"    pm.expect(jsonData.results.length).to.eq(1);",
+							"});",
+							"",
+							"pm.test(\"Response contains similar\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"similar\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/books/book/Introduction to Algorithms, Third Edition",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"books",
+						"book",
+						"Introduction to Algorithms, Third Edition"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchBooks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response contains results\", function () {",
+							"    pm.expect(jsonData.results.length).to.gt(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/books/?search=the c%2b%2b",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"books",
+						""
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "book",
+							"disabled": true
+						},
+						{
+							"key": "search",
+							"value": "the c%2b%2b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAuthors",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response contains results\", function () {",
+							"    pm.expect(jsonData.results.length).to.gt(0);",
+							"});",
+							"",
+							"pm.test(\"Response results each has books\", function () {",
+							"    if(pm.expect(jsonData.results.length).not.eq(0)){",
+							"        for (let i=0;i<jsonData.results.length;i++){",
+							"            pm.expect(jsonData.results[i]['books'].length).to.gte(1);",
+							"        }",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/books/authors?page=1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"books",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getNotes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response contains results\", function () {",
+							"    pm.expect(jsonData.results.length).to.gt(0);",
+							"});",
+							"",
+							"pm.test(\"Response contains latest\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"latest\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/notes?page=1&sort=name",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"notes"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "sort",
+							"value": "name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchNotes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response contains results\", function () {",
+							"    pm.expect(jsonData.results.length).to.gt(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/notes/search?name=docker&sort=name",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"notes",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "docker"
+						},
+						{
+							"key": "sort",
+							"value": "name"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

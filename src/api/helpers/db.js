@@ -1,19 +1,19 @@
-const Authors = async (queryObject) => {
-  const newArray = queryObject
-  newArray.unshift({
+const Authors = async (mainQueryArray) => {
+  const queryArray = mainQueryArray
+  queryArray.unshift({
     $group: {
       _id: `$author`,
       books: { $addToSet: "$book" }
     }
   },
     { $sort: { _id: 1 } })
-  return newArray
+  return queryArray
 }
 
-const Books = async (queryObject, search) => {
+const Books = async (mainQueryArray, search) => {
   search = search.replace(/[+]/g, '\\W')
-  const newArray = queryObject
-  newArray.unshift(
+  const queryArray = mainQueryArray
+  queryArray.unshift(
     {
       $match: {
         $or: [
@@ -26,29 +26,28 @@ const Books = async (queryObject, search) => {
     },
   )
   if (!search) {
-    newArray.at(-1)['$facet']['latest'] = [
+    queryArray.at(-1)['$facet']['latest'] = [
       {
         $sort: { dateAdded: -1 }
       }
     ]
   }
-  return newArray
+  return queryArray
 }
 
 const Book = async (search) => {
-  let newArray = [
+  let queryArray = [
     {
       $match: {
         book: search
       }
     }
   ]
-  return newArray
+  return queryArray
 }
 
 const similarBooks = async (search, category) => {
-
-  let newArray = [
+  let queryArray = [
     {
       $match: {
         $and: [
@@ -57,11 +56,11 @@ const similarBooks = async (search, category) => {
       }
     }
   ]
-  return newArray
+  return queryArray
 }
 
-const createQueryObject = async (type, limit, skip, search = '', category) => {
-  let queryObject = [
+const createQueryArray = async (type, limit, skip, search = '', category) => {
+  let mainQueryArray = [
     {
       $facet: {
         total: [
@@ -82,23 +81,19 @@ const createQueryObject = async (type, limit, skip, search = '', category) => {
   ]
 
   if (type === 'author') {
-    const result = await Authors(queryObject)
-    return result
+    return await Authors(mainQueryArray)
   }
 
-  if (type === 'books') {
-    const result = await Books(queryObject, search)
-    return result
+  else if (type === 'books') {
+    return await Books(mainQueryArray, search)
   }
 
-  if (type === 'book') {
-    const result = await Book(search)
-    return result
+  else if (type === 'book') {
+    return await Book(search, category)
   }
-  if (type === 'similar') {
-    const result = await similarBooks(search, category)
-    return result
+  else {
+    return await similarBooks(search, category)
   }
 }
 
-export default createQueryObject
+export default createQueryArray

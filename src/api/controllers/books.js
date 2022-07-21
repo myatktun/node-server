@@ -1,10 +1,8 @@
-import { queryDB, getSimilarBooks, calcMisc } from '../helpers/helpers.js'
+import { queryDB, getSimilarBooks } from '../helpers/helpers.js'
 
 export const getBooks = async (req, res) => {
   try {
-    const [page, limit, skip] = await calcMisc(req.query.page, req.query.limit)
-
-    const [result, latest] = await queryDB('books', limit, skip, req.query.search)
+    const { result, latest, page, limit } = await queryDB('books', req)
     const { total, data: books } = result
 
     const totalBooks = total[0].total
@@ -27,9 +25,7 @@ export const getBooks = async (req, res) => {
 
 export const getBook = async (req, res) => {
   try {
-    const { book } = req.params
-
-    const [result] = await queryDB('book', 1, 1, book)
+    const { result } = await queryDB('book', req)
 
     if (result) {
       const similarBooks = await getSimilarBooks(result)
@@ -44,10 +40,9 @@ export const getBook = async (req, res) => {
 
 export const getAuthors = async (req, res) => {
   try {
-    const [page, limit, skip] = await calcMisc(req.query.page, req.query.limit)
+    const { result, page, limit } = await queryDB('author', req)
 
-    const { total, data: authors } = (await queryDB('author', limit, skip))[0]
-
+    const { total, data: authors } = result
     const totalAuthors = total[0].total
     const totalPages = Math.ceil(totalAuthors / limit)
     if (authors.length) {

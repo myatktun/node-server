@@ -27,5 +27,5 @@ each book. Also making a front-end React site to be used with.
 * Show notes about each book (x)
 * Add notes or reviews about books from users (x)
 
-<sub>Currently still in development. Docker files are just for training purpose. Test data is
+<sub>Currently still in development. Docker files are just for practice. Test data is
 provided in [/src/api/db/bookData.json](/src/api/db/bookData.json)</sub>

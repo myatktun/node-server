@@ -33,6 +33,22 @@
   },
   {
     "category": "Biography",
+    "book": "Hard Drive: Bill Gates and the Making of the Microsoft Empire",
+    "author": "Jim Erickson",
+    "isbn": "9780471568865",
+    "dateAdded": "2022:04:08 23:10:13+06:30",
+    "olid": "OL1565916M"
+  },
+  {
+    "category": "Biography",
+    "book": "In the Plex: How Google Thinks, Works, and Shapes Our Lives",
+    "author": "Steven Levy",
+    "isbn": "9781416596585",
+    "dateAdded": "2022:04:08 23:08:11+06:30",
+    "olid": "OL26318641M"
+  },
+  {
+    "category": "Biography",
     "book": "I, Steve: Steve Jobs in His Own Words",
     "author": "George Beahm",
     "isbn": "9781742703589",
@@ -97,14 +113,6 @@
   },
   {
     "category": "Business",
-    "book": "Hard Drive: Bill Gates and the Making of the Microsoft Empire",
-    "author": "Jim Erickson",
-    "isbn": "9780471568865",
-    "dateAdded": "2022:04:08 23:10:13+06:30",
-    "olid": "OL1565916M"
-  },
-  {
-    "category": "Business",
     "book": "Incerto: Fooled by Randomness, the Black Swan, the Bed of Procrustes, Antifragile",
     "author": "Nassim Nicholas Taleb",
     "isbn": "9780399590450",
@@ -118,14 +126,6 @@
     "isbn": "9780875845852",
     "dateAdded": "2022:03:24 23:13:12+06:30",
     "olid": "OL973965M"
-  },
-  {
-    "category": "Business",
-    "book": "In the Plex: How Google Thinks, Works, and Shapes Our Lives",
-    "author": "Steven Levy",
-    "isbn": "9781416596585",
-    "dateAdded": "2022:04:08 23:08:11+06:30",
-    "olid": "OL26318641M"
   },
   {
     "category": "Business",
@@ -674,6 +674,14 @@
   },
   {
     "category": "CS",
+    "book": "Object-Oriented Programming in C++",
+    "author": "Robert Lafore",
+    "isbn": "9780672323089",
+    "dateAdded": "2022:07:20 20:03:31+06:30",
+    "olid": "OL7668432M"
+  },
+  {
+    "category": "CS",
     "book": "Probabilistic Machine Learning: An Introduction",
     "author": "Kevin P. Murphy",
     "isbn": "9780262046824",
@@ -782,25 +790,25 @@
     "category": "Fiction",
     "book": "Strange Case of Dr Jekyll and Mr Hyde and Other Tales",
     "author": "Robert Louis Stevenson",
-    "isbn": "9780497900045",
+    "isbn": "9789871093076",
     "dateAdded": "2022:05:28 16:52:46+06:30",
-    "olid": "OL10416441M"
+    "olid": "OL26327295M"
   },
   {
     "category": "Fiction",
     "book": "The Tale of Genji: (Penguin Classics Deluxe Edition)",
     "author": "Murasaki Shikibu",
-    "isbn": "9784096580202",
+    "isbn": "9784770027726",
     "dateAdded": "2022:07:03 21:49:09+06:30",
-    "olid": "OL15310539M"
+    "olid": "OL9037425M"
   },
   {
     "category": "Fiction",
     "book": "Wuthering Heights",
     "author": "Emily Jane Bronte",
-    "isbn": "9781540420329",
+    "isbn": "9781684122882",
     "dateAdded": "2022:04:07 02:46:22+06:30",
-    "olid": "OL32588185M"
+    "olid": "OL27370383M"
   },
   {
     "category": "Language",

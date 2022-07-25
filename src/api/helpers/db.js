@@ -1,16 +1,17 @@
 const Authors = async (mainQueryArray) => {
   const queryArray = mainQueryArray
-  queryArray.unshift({
-    $group: {
-      _id: `$author`,
-      books: { $addToSet: "$book" }
-    }
-  },
-    { $sort: { _id: 1 } })
+  queryArray.unshift(
+    {
+      $group: {
+        _id: `$author`,
+        books: { $addToSet: '$book' }
+      }
+    },
+  )
   return queryArray
 }
 
-const Books = async (mainQueryArray, search) => {
+const Books = async (mainQueryArray, search = '') => {
   search = search.replace(/[+]/g, '\\W')
   const queryArray = mainQueryArray
   queryArray.unshift(
@@ -29,37 +30,47 @@ const Books = async (mainQueryArray, search) => {
     queryArray.at(-1)['$facet']['latest'] = [
       {
         $sort: { dateAdded: -1 }
+      },
+      {
+        $limit: 1
       }
     ]
   }
   return queryArray
 }
 
-const Book = async (search) => {
+const Book = async (book) => {
   let queryArray = [
     {
       $match: {
-        book: search
+        book: book
+      }
+    },
+    {
+      $lookup: {
+        from: "books",
+        let: { book: "$book", category: "$category" },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $and: [
+                  { $ne: ["$$book", "$book"] },
+                  { $eq: ["$$category", "$category"] }
+                ]
+              }
+            }
+          }
+        ],
+        as: "similar"
       }
     }
   ]
   return queryArray
 }
 
-const similarBooks = async (search, category) => {
-  let queryArray = [
-    {
-      $match: {
-        $and: [
-          { book: { $ne: `${search}` } }, { category: { $eq: `${category}` } }
-        ]
-      }
-    }
-  ]
-  return queryArray
-}
-
-const createQueryArray = async (type, limit, skip, search = '', category) => {
+const createQueryArray = async (req, limit, skip) => {
+  const { route, query, params } = req
   let mainQueryArray = [
     {
       $facet: {
@@ -79,21 +90,22 @@ const createQueryArray = async (type, limit, skip, search = '', category) => {
       }
     }
   ]
+  if (query.sort) {
+    mainQueryArray.unshift(
+      {
+        $sort: {
+          [`${query.sort}`]: Number(query.sortOrder) || 1
+        }
+      }
+    )
+  }
 
-  if (type === 'author') {
+  if (route.path === '/books/authors') {
     return await Authors(mainQueryArray)
+  } else if (route.path === '/books') {
+    return await Books(mainQueryArray, query.search)
   }
-
-  else if (type === 'books') {
-    return await Books(mainQueryArray, search)
-  }
-
-  else if (type === 'book') {
-    return await Book(search, category)
-  }
-  else {
-    return await similarBooks(search, category)
-  }
+  return await Book(params.book)
 }
 
 export default createQueryArray

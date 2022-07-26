@@ -1,4 +1,4 @@
-import createQueryArray from './db.js'
+import createQueryArray from './createQueryArray.js'
 import Books from '../models/Book.js'
 
 const calcMisc = async (query) => {

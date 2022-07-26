@@ -10,8 +10,10 @@ It returns information about books and notes about each book. It exposes /api/v1
 endpoints:
 
 * /books
-  - /category
-  - /book/:book
+  - /categories
+    - /:category
+  - /books
+    - /:book
   - /authors
     - /:author
 * /notes
@@ -27,5 +29,5 @@ each book. Also making a front-end React site to be used with.
 * Show notes about each book (x)
 * Add notes or reviews about books from users (x)
 
-<sub>Currently still in development. Docker files are just for practice. Test data is
-provided in [/src/api/db/bookData.json](/src/api/db/bookData.json)</sub>
+<sub>Currently still in development. Docker files are just for practice. Test data is provided
+in [/src/api/db/bookData.json](/src/api/db/bookData.json)</sub>

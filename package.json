@@ -13,7 +13,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon -r dotenv/config src/server.js",
-    "newman": "newman run -g postman/postman_globals.json postman/node-server.postman_collection.json"
+    "newman": "./postman/test.sh"
   },
   "devDependencies": {
     "dotenv": "^16.0.1",

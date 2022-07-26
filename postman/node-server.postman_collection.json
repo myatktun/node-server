@@ -34,18 +34,20 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/books/?sort=category&page=6",
+					"raw": "{{URL}}/books/books/?page=1",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
+						"books",
 						"books",
 						""
 					],
 					"query": [
 						{
 							"key": "sort",
-							"value": "category"
+							"value": "book",
+							"disabled": true
 						},
 						{
 							"key": "limit",
@@ -59,7 +61,12 @@
 						},
 						{
 							"key": "page",
-							"value": "6"
+							"value": "1"
+						},
+						{
+							"key": "sortOrder",
+							"value": "-1",
+							"disabled": true
 						}
 					]
 				}
@@ -67,7 +74,7 @@
 			"response": []
 		},
 		{
-			"name": "getBook",
+			"name": "getSingleBook",
 			"event": [
 				{
 					"listen": "test",
@@ -80,7 +87,7 @@
 							"var jsonData = pm.response.json();",
 							"",
 							"pm.test(\"Response contains results\", function () {",
-							"    pm.expect(jsonData.results.length).to.eq(1);",
+							"    pm.expect(pm.response.text()).to.include(\"results\");",
 							"});",
 							"",
 							"pm.test(\"Response contains similar\", function () {",
@@ -107,14 +114,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/books/book/Introduction to Algorithms, Third Edition",
+					"raw": "{{URL}}/books/books/Grokking Algorithms: An Illustrated Guide for Programmers and Other Curious People",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"books",
-						"book",
-						"Introduction to Algorithms, Third Edition"
+						"books",
+						"Grokking Algorithms: An Illustrated Guide for Programmers and Other Curious People"
 					]
 				}
 			},
@@ -145,23 +152,27 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/books/?search=the c%2b%2b",
+					"raw": "{{URL}}/books/books/?sort=book&search=the c&sortOrder=1",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
+						"books",
 						"books",
 						""
 					],
 					"query": [
 						{
 							"key": "sort",
-							"value": "book",
-							"disabled": true
+							"value": "book"
 						},
 						{
 							"key": "search",
-							"value": "the c%2b%2b"
+							"value": "the c"
+						},
+						{
+							"key": "sortOrder",
+							"value": "1"
 						}
 					]
 				}
@@ -202,7 +213,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/books/authors?page=1",
+					"raw": "{{URL}}/books/authors",
 					"host": [
 						"{{URL}}"
 					],
@@ -213,7 +224,18 @@
 					"query": [
 						{
 							"key": "page",
-							"value": "1"
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "sort",
+							"value": "_id",
+							"disabled": true
+						},
+						{
+							"key": "sortOrder",
+							"value": "-1",
+							"disabled": true
 						}
 					]
 				}
@@ -295,7 +317,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/notes/search?name=docker&sort=name",
+					"raw": "{{URL}}/notes/search?name=node&sort=name",
 					"host": [
 						"{{URL}}"
 					],
@@ -306,12 +328,150 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "docker"
+							"value": "node"
 						},
 						{
 							"key": "sort",
 							"value": "name"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchAuthors",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response contains results\", function () {",
+							"    pm.expect(jsonData.results.length).to.gt(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/books/authors?search=greg",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"books",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "sort",
+							"value": "_id",
+							"disabled": true
+						},
+						{
+							"key": "sortOrder",
+							"value": "-1",
+							"disabled": true
+						},
+						{
+							"key": "search",
+							"value": "greg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSingleAuthor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/books/authors/Greg Kroah-Hartman",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"books",
+						"authors",
+						"Greg Kroah-Hartman"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCategories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/books/categories",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"books",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchCategories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/books/categories?search=b",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"books",
+						"categories"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSingleCategory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/books/categories/Algorithms",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"books",
+						"categories",
+						"Algorithms"
 					]
 				}
 			},

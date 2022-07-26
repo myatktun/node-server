@@ -9,14 +9,14 @@ const calcMisc = async (query) => {
 }
 
 const cleanReq = async (req) => {
-  const [page, limit, skip] = Object.keys(req.query).length ? await calcMisc(req.query) : [1, 1, 1]
-  const queryObject = await createQueryArray(req, limit, skip)
-  return { queryObject, page, limit }
+  const [page, limit, skip] = await calcMisc(req.query)
+  const queryArray = await createQueryArray(req, limit, skip)
+  return { queryArray, page, limit }
 }
 
 const queryDB = async (req) => {
-  const { queryObject, page, limit } = await cleanReq(req)
-  const result = await Books.aggregate(queryObject)
+  const { queryArray, page, limit } = await cleanReq(req)
+  const result = await Books.aggregate(queryArray)
   return { result, page, limit }
 }
 

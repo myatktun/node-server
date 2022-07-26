@@ -1,16 +1,3 @@
-const Authors = async (mainQueryArray) => {
-  const queryArray = mainQueryArray
-  queryArray.unshift(
-    {
-      $group: {
-        _id: `$author`,
-        books: { $addToSet: '$book' }
-      }
-    },
-  )
-  return queryArray
-}
-
 const Books = async (mainQueryArray, search = '') => {
   search = search.replace(/[+]/g, '\\W')
   const queryArray = mainQueryArray
@@ -39,7 +26,7 @@ const Books = async (mainQueryArray, search = '') => {
   return queryArray
 }
 
-const Book = async (book) => {
+const singleBook = async (book) => {
   let queryArray = [
     {
       $match: {
@@ -66,6 +53,42 @@ const Book = async (book) => {
       }
     }
   ]
+  return queryArray
+}
+
+const Authors = async (mainQueryArray, author = '') => {
+  const queryArray = mainQueryArray
+  queryArray.unshift(
+    {
+      $group: {
+        _id: `$author`,
+        books: { $addToSet: '$book' }
+      }
+    },
+    {
+      $match: {
+        _id: { $regex: author, $options: 'i' }
+      }
+    }
+  )
+  return queryArray
+}
+
+const Categories = async (mainQueryArray, category = '') => {
+  const queryArray = mainQueryArray
+  queryArray.unshift(
+    {
+      $group: {
+        _id: `$category`,
+        books: { $addToSet: '$book' }
+      }
+    },
+    {
+      $match: {
+        _id: { $regex: category, $options: 'i' }
+      }
+    }
+  )
   return queryArray
 }
 
@@ -100,12 +123,16 @@ const createQueryArray = async (req, limit, skip) => {
     )
   }
 
-  if (route.path === '/books/authors') {
-    return await Authors(mainQueryArray)
-  } else if (route.path === '/books') {
+  if (route.path.includes('/books')) {
+    if (route.path.includes('/:book')) {
+      return await singleBook(params.book)
+    } else if (route.path.includes('/authors')) {
+      return await Authors(mainQueryArray, query.search || params.author)
+    } else if (route.path.includes('/categories')) {
+      return await Categories(mainQueryArray, query.search || params.category)
+    }
     return await Books(mainQueryArray, query.search)
   }
-  return await Book(params.book)
 }
 
 export default createQueryArray

@@ -11,3 +11,4 @@
 !/src/api/db/bookData.json
 
 *.old.js
+test.sh

@@ -1,16 +1,8 @@
-import queryDB from '../helpers/helpers.js'
-
-const cleanQueryResult = async (req) => {
-  const { result, page, limit } = await queryDB(req)
-  const { total, data, latest } = result[0]
-  const totalResults = total[0] ? total[0].total : 0
-  const totalPages = Math.ceil(totalResults / limit)
-  return { totalResults, totalPages, page, limit, data, latest }
-}
+import getData from '../helpers/helpers.js'
 
 export const getFromBooks = async (req, res) => {
   try {
-    const { totalResults, totalPages, page, limit, data, latest } = await cleanQueryResult(req)
+    const { totalResults, totalPages, page, limit, data, latest } = await getData(req)
 
     if (data.length) {
       return res.status(200).send({

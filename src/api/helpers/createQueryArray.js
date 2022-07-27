@@ -1,4 +1,4 @@
-import { Books, Authors, Categories } from './queryArrays.js'
+import { Books, Authors, Categories, Notes } from './queryArrays.js'
 
 const createQueryArray = async (req, limit, skip) => {
   const { route, query, params } = req
@@ -7,7 +7,7 @@ const createQueryArray = async (req, limit, skip) => {
       $facet: {
         total: [
           {
-            $count: "total"
+            $count: 'total'
           }
         ],
         data: [
@@ -38,6 +38,8 @@ const createQueryArray = async (req, limit, skip) => {
       return await Categories(mainQueryArray, query.search || params.category)
     }
     return await Books(mainQueryArray, query.search || params.book, Object.keys(params).length)
+  } else if (route.path.includes('/notes')) {
+    return await Notes(mainQueryArray, query.name || params.note)
   }
 }
 

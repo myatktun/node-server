@@ -1,5 +1,6 @@
 import createQueryArray from './createQueryArray.js'
 import Books from '../models/Book.js'
+import Notes from '../models/Note.js'
 
 const calcMisc = async (query) => {
   const page = Number(query.page) || 1
@@ -16,8 +17,19 @@ const cleanReq = async (req) => {
 
 const queryDB = async (req) => {
   const { queryArray, page, limit } = await cleanReq(req)
-  const result = await Books.aggregate(queryArray)
+  if (req.route.path.includes('/books')) {
+    const result = await Books.aggregate(queryArray)
+    return { result, page, limit }
+  }
+  const result = await Notes.aggregate(queryArray)
   return { result, page, limit }
 }
 
-export default queryDB
+const getData = async (req) => {
+  const { result, page, limit } = await queryDB(req)
+  const { total, data, latest } = result[0]
+  const totalResults = total[0] ? total[0].total : 0
+  const totalPages = Math.ceil(totalResults / limit)
+  return { totalResults, totalPages, page, limit, data, latest }
+}
+export default getData

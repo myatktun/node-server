@@ -96,4 +96,17 @@ const Categories = async (mainQueryArray, category = '') => {
   return queryArray
 }
 
-export { Books, Authors, Categories }
+const Notes = async (mainQueryArray, note = '') => {
+  note = note.replace(/[+]/g, '\\W')
+  const queryArray = mainQueryArray
+  queryArray.unshift(
+    {
+      $match: {
+        name: { $regex: note, $options: 'i' }
+      }
+    }
+  )
+  return queryArray
+}
+
+export { Books, Authors, Categories, Notes }

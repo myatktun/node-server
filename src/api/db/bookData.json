@@ -104,6 +104,14 @@
     "olid": "OL30112023M"
   },
   {
+    "category": "BlockChain",
+    "book": "The Internet of Money: A Collection of Talks by Andreas M. Antonopoulos",
+    "author": "Andreas M. Antonopoulos",
+    "isbn": "9781537000459",
+    "dateAdded": "2022:03:21 14:00:02+06:30",
+    "olid": "OL26932639M"
+  },
+  {
     "category": "Business",
     "book": "A Beginner's Guide to the Stock Market: Everything You Need to Start Making Money Today",
     "author": "Matthew R Kratter",
@@ -598,14 +606,6 @@
   },
   {
     "category": "BlockChain",
-    "book": "The Internet of Money: A Collection of Talks by Andreas M. Antonopoulos",
-    "author": "Andreas M. Antonopoulos",
-    "isbn": "9781947910171",
-    "dateAdded": "2022:03:21 14:00:02+06:30",
-    "olid": "OL30405775M"
-  },
-  {
-    "category": "BlockChain",
     "book": "Mastering Bitcoin",
     "author": "Andreas M. Antonopoulos",
     "dateAdded": "2022:03:21 14:00:03+06:30",
@@ -766,9 +766,9 @@
     "category": "Fiction",
     "book": "I, Robot",
     "author": "Isaac Asimov",
-    "isbn": "9788576572008",
+    "isbn": "9780586025321",
     "dateAdded": "2022:05:03 14:09:51+06:30",
-    "olid": "OL26804432M"
+    "olid": "OL7882647M"
   },
   {
     "category": "Fiction",

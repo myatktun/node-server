@@ -10,12 +10,12 @@ It returns information about books and notes about each book. It exposes /api/v1
 endpoints:
 
 * /books
-  - /categories
-    - /:category
-  - /books
-    - /:book
-  - /authors
-    - /:author
+    - /categories
+        - /:category
+    - /books
+        - /:book
+    - /authors
+        - /:author
 * /notes
 
 ## Purpose of the project

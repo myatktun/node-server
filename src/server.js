@@ -13,13 +13,13 @@ app.use(express.json())
 app.use('/api/v1', routes)
 
 const start = async () => {
-  try {
-    await connectDB(process.env.MONGO_URI)
-    console.log('Connected to mongodb')
-    app.listen(PORT, () => console.log(`Server listening on port ${PORT}...`))
-  } catch (error) {
-    console.log(error)
-  }
+    try {
+        await connectDB(process.env.MONGO_URI)
+        console.log('Connected to mongodb')
+        app.listen(PORT, () => console.log(`Server listening on port ${PORT}...`))
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 start()

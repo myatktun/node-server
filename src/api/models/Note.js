@@ -11,6 +11,6 @@ const NotesSchema = new mongoose.Schema({
     category: {
         type: String
     }
-})
+}, { versionKey: false })
 
 export default mongoose.model('Notes', NotesSchema)

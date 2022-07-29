@@ -28,6 +28,6 @@ const BookSchema = new mongoose.Schema({
     category: {
         type: String
     }
-})
+}, { versionKey: false })
 
 export default mongoose.model('Books', BookSchema)

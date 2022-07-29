@@ -129,14 +129,6 @@
   },
   {
     "category": "Business",
-    "book": "The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail",
-    "author": "Clayton M. Christensen",
-    "isbn": "9780875845852",
-    "dateAdded": "2022:03:24 23:13:12+06:30",
-    "olid": "OL973965M"
-  },
-  {
-    "category": "Business",
     "book": "I Will Teach You to Be Rich, Second Edition: No Guilt. No Excuses. No BS. Just a 6-Week Program That Works",
     "author": "Ramit Sethi",
     "isbn": "9781523505746",
@@ -611,6 +603,14 @@
     "dateAdded": "2022:03:21 14:00:03+06:30",
     "isbn": "9781984168788",
     "olid": "OL27776213M"
+  },
+  {
+    "category": "Business",
+    "book": "The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail",
+    "author": "Clayton M. Christensen",
+    "isbn": "9781633691780",
+    "dateAdded": "2022:03:24 23:13:12+06:30",
+    "olid": "OL26432023M"
   },
   {
     "category": "Business",

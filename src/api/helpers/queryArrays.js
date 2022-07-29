@@ -47,11 +47,16 @@ const relatedNotesQuery = async () => {
                     {
                         $match: {
                             $expr: {
-                                $or: [
-                                    { $eq: ["$$book", "$name"] },
-                                    { $eq: ["$$category", "$category"] }
+                                $and: [
+                                    { $eq: ["$$category", "$category"] },
+                                    { $ne: ["$$book", "$name"] }
                                 ]
                             }
+                        }
+                    },
+                    {
+                        $project: {
+                            data: 0
                         }
                     }
                 ],
@@ -71,10 +76,13 @@ const bookNote = async () => {
                     {
                         $match: {
                             $expr: {
-                                $and: [
-                                    { $eq: ["$$book", "$name"] }
-                                ]
+                                $eq: ["$$book", "$name"]
                             }
+                        }
+                    },
+                    {
+                        $project: {
+                            data: 0
                         }
                     }
                 ],

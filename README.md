@@ -45,8 +45,11 @@ The response is JSON object, always in the same format.
 }
 ```
 
-Only '**/books/books**' with no query parameters contains extra object, '**latest**', which is an array.
+Only '**/books/books**' with no query parameters contains extra object, '**latest**', which is
+an array.
+
 '**results**' is always an array, no matter the route, with objects as elements.
+
 Each book in the results from '**/books/books**' contains the following:
 
 1. _id: id created by mongo

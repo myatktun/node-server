@@ -1,7 +1,8 @@
 import express from 'express'
 
-import { getFromBooks } from '../controllers/books.js'
+import { getFromBooks, postToBooks } from '../controllers/books.js'
 import { getFromNotes } from '../controllers/notes.js'
+import auth from '../middleware/auth.js'
 
 const router = express.Router()
 
@@ -14,5 +15,7 @@ router.route('/books/categories/:category').get(getFromBooks)
 
 router.route('/notes').get(getFromNotes)
 router.route('/notes/:note').get(getFromNotes)
+
+router.route(`${process.env.API_UPDATE_ROUTE}`).patch(auth, postToBooks)
 
 export default router

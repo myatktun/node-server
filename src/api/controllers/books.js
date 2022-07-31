@@ -19,3 +19,8 @@ export const getFromBooks = async (req, res) => {
         console.log(error)
     }
 }
+
+export const postToBooks = async (req, res) => {
+    const { authorized } = req
+    res.status(200).send({ msg: 'Updated book', authorized })
+}

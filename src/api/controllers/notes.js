@@ -1,4 +1,4 @@
-import getData from '../helpers/helpers.js'
+import { getData } from '../helpers/helpers.js'
 
 export const getFromNotes = async (req, res) => {
     try {

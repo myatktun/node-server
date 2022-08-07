@@ -1,4 +1,4 @@
-import getData from '../helpers/helpers.js'
+import { getData, updateData } from '../helpers/helpers.js'
 
 export const getFromBooks = async (req, res) => {
     try {
@@ -22,5 +22,11 @@ export const getFromBooks = async (req, res) => {
 
 export const postToBooks = async (req, res) => {
     const { authorized } = req
-    res.status(200).send({ msg: 'Updated book', authorized })
+    try {
+        await updateData(req)
+        res.status(200).send({ msg: `Updated book: ${req.params.book}`, authorized })
+    } catch (error) {
+        res.status(404).send({ msg: 'Something went wrong' })
+        console.log(error)
+    }
 }

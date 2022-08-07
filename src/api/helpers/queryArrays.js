@@ -1,4 +1,12 @@
-const booksMainQuery = async (search) => {
+const booksMainQuery = async (search, isGetSingleBook) => {
+    if (isGetSingleBook) {
+        return (
+            {
+                $match: { book: search }
+            }
+        )
+    }
+
     return (
         {
             $match: {
@@ -102,7 +110,7 @@ const Books = async (mainQueryArray, search = '', isGetSingleBook) => {
         queryArray.unshift(await similarBooksQuery())
     }
 
-    queryArray.unshift(await booksMainQuery(search))
+    queryArray.unshift(await booksMainQuery(search, isGetSingleBook))
 
     if (!search) {
         queryArray.at(-1)['$facet']['latest'] = [

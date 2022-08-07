@@ -25,7 +25,7 @@ const queryDB = async (req) => {
     return { result, page, limit }
 }
 
-const getData = async (req) => {
+export const getData = async (req) => {
     const { result, page, limit } = await queryDB(req)
     const { total, data, latest } = result[0]
     const totalResults = total[0] ? total[0].total : 0
@@ -33,4 +33,9 @@ const getData = async (req) => {
     return { totalResults, totalPages, page, limit, data, latest }
 }
 
-export default getData
+export const updateData = async (req) => {
+    await Books.findOneAndUpdate({ book: req.params.book }, req.body, {
+        new: true,
+        runValidators: true
+    })
+}

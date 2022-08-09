@@ -23,8 +23,11 @@ export const getFromBooks = async (req, res) => {
 export const postToBooks = async (req, res) => {
     const { authorized } = req
     try {
-        await updateData(req)
-        res.status(200).send({ msg: `Updated book: ${req.params.book}`, authorized })
+        if (req.body.read) {
+            await updateData(req)
+            return res.status(200).send({ msg: `Updated book: ${req.params.book}`, authorized })
+        }
+        res.status(200).send({ msg: 'No data to update', authorized })
     } catch (error) {
         res.status(404).send({ msg: 'Something went wrong' })
         console.log(error)

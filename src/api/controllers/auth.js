@@ -14,6 +14,5 @@ export const login = async (req, res) => {
         return res.status(404).send({ msg: 'Invalid credentials' })
     }
 
-    const token = user.createJWT()
-    res.status(200).json({ name: user.name, token })
+    res.status(200).json({ name: user.name, token: user.createJWT() })
 }

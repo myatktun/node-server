@@ -23,7 +23,7 @@ UserSchema.pre('save', async function() {
 })
 
 UserSchema.methods.createJWT = function() {
-    const id = new Date().getDate()
+    const id = new Date().getTime()
     return jwt.sign({ id, name: this.name }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_TIME })
 }
 

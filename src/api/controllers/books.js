@@ -21,15 +21,14 @@ export const getFromBooks = async (req, res) => {
 }
 
 export const postToBooks = async (req, res) => {
-    const { authorized } = req
     try {
         if (req.body.read) {
             await updateData(req)
-            return res.status(200).send({ msg: `Updated book: ${req.params.book}`, authorized })
+            return res.status(200).send({ msg: `Updated book: ${req.params.book}` })
         }
-        res.status(200).send({ msg: 'No data to update', authorized })
+        res.status(200).send({ msg: 'No data to update' })
     } catch (error) {
-        res.status(404).send({ msg: 'Something went wrong' })
+        res.status(404).send({ msg: 'Invalid data provided' })
         console.log(error)
     }
 }

@@ -161,13 +161,31 @@ const Categories = async (mainQueryArray, category = '') => {
     return queryArray
 }
 
-const Notes = async (mainQueryArray, note = '') => {
+const Notes = async (mainQueryArray, note = '', isGetSingleNote) => {
     note = note.replace(/[+]/g, '\\W')
     const queryArray = mainQueryArray
+
+    if (isGetSingleNote) {
+        queryArray.unshift(
+            {
+                $match: { name: note }
+            },
+        )
+        return queryArray
+    }
+
     queryArray.unshift(
         {
             $match: {
-                name: { $regex: note, $options: 'i' }
+                $or: [
+                    { name: { $regex: note, $options: 'i' } },
+                    { category: { $regex: note, $options: 'i' } },
+                ]
+            }
+        },
+        {
+            $project: {
+                data: 0
             }
         }
     )

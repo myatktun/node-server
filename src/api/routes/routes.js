@@ -2,8 +2,9 @@ import express from 'express'
 
 import { getFromBooks, postToBooks } from '../controllers/books.js'
 import { getFromNotes } from '../controllers/notes.js'
-import auth from '../middleware/auth.js'
 import { login } from '../controllers/auth.js'
+
+import auth from '../middleware/auth.js'
 
 const router = express.Router()
 

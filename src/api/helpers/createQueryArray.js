@@ -38,9 +38,8 @@ const createQueryArray = async (req, limit, skip) => {
             return await Categories(mainQueryArray, query.search || params.category)
         }
         return await Books(mainQueryArray, query.search || params.book, Object.keys(params).length)
-    } else if (route.path.includes('/notes')) {
-        return await Notes(mainQueryArray, query.name || params.note)
     }
+    return await Notes(mainQueryArray, query.search || params.note, Object.keys(params).length)
 }
 
 export default createQueryArray

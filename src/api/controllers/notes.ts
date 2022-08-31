@@ -1,6 +1,7 @@
-import { getData } from '../helpers/helpers.js'
+import { getData } from "../helpers/helpers"
+import { Request, Response } from "express"
 
-export const getFromNotes = async (req, res) => {
+export const getFromNotes = async (req: Request, res: Response): Promise<Response> => {
     try {
         const { totalResults, totalPages, page, limit, data, latest } = await getData(req)
 
@@ -12,10 +13,10 @@ export const getFromNotes = async (req, res) => {
                 latest: latest
             })
         }
-        res.status(404).send({ total: totalResults, msg: 'No notes found' })
+        return res.status(404).send({ total: totalResults, msg: "No notes found" })
 
     } catch (error) {
-        res.status(404).send({ msg: 'Something went wrong' })
         console.log(error)
+        return res.status(404).send({ msg: "Something went wrong" })
     }
 }

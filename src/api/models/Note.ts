@@ -1,9 +1,9 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose"
 
 const NotesSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'name must be provided']
+        required: [true, "name must be provided"]
     },
     data: {
         type: String
@@ -13,4 +13,4 @@ const NotesSchema = new mongoose.Schema({
     }
 }, { versionKey: false })
 
-export default mongoose.model('Notes', NotesSchema)
+export default mongoose.model("Notes", NotesSchema)

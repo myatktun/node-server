@@ -1,14 +1,19 @@
 /node_modules
 
+/dist
+
 .env.*
 .env
 
 *.json
 !package.json
+!.eslintrc.json
+!tsconfig.json
 
 /src/api/db/*
-!/src/api/db/connect.js
+!/src/api/db/connect.ts
 !/src/api/db/bookData.json
 
 *.old.js
-test.sh
+*.dev.ts
+*.sh

@@ -1,6 +1,7 @@
-import { getData, updateData } from '../helpers/helpers.js'
+import { getData, updateData } from "../helpers/helpers"
+import { Request, Response } from "express"
 
-export const getFromBooks = async (req, res) => {
+export const getFromBooks = async (req: Request, res: Response): Promise<Response> => {
     try {
         const { totalResults, totalPages, page, limit, data, latest } = await getData(req)
 
@@ -12,23 +13,23 @@ export const getFromBooks = async (req, res) => {
                 latest: latest
             })
         }
-        res.status(404).send({ total: totalResults, msg: 'No books found' })
+        return res.status(404).send({ total: totalResults, msg: "No books found" })
 
     } catch (error) {
-        res.status(404).send({ msg: 'Something went wrong' })
         console.log(error)
+        return res.status(404).send({ msg: "Something went wrong" })
     }
 }
 
-export const postToBooks = async (req, res) => {
+export const postToBooks = async (req: Request, res: Response): Promise<Response> => {
     try {
         if (req.body.read) {
             await updateData(req)
             return res.status(200).send({ msg: `Updated book: ${req.params.book}` })
         }
-        res.status(200).send({ msg: 'No data to update' })
+        return res.status(200).send({ msg: "No data to update" })
     } catch (error) {
-        res.status(404).send({ msg: 'Invalid data provided' })
         console.log(error)
+        return res.status(404).send({ msg: "Invalid data provided" })
     }
 }

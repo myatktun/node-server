@@ -1,10 +1,10 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose"
 
 const BookSchema = new mongoose.Schema({
     book: String,
     author: {
         type: String,
-        default: 'unknown'
+        default: "unknown"
     },
     isbn: {
         type: Number,
@@ -12,15 +12,15 @@ const BookSchema = new mongoose.Schema({
     },
     olid: {
         type: String,
-        default: 'unknown'
+        default: "unknown"
     },
     read: {
         type: String,
         enum: {
-            values: ['new', 'reading', 'finished'],
-            message: '{VALUE} is not supported'
+            values: ["new", "reading", "finished"],
+            message: "{VALUE} is not supported"
         },
-        default: 'new'
+        default: "new"
     },
     dateAdded: {
         type: String,
@@ -30,4 +30,4 @@ const BookSchema = new mongoose.Schema({
     }
 }, { versionKey: false })
 
-export default mongoose.model('Books', BookSchema)
+export default mongoose.model("Books", BookSchema)

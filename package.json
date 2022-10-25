@@ -11,8 +11,8 @@
         "mongoose": "^6.4.0"
     },
     "scripts": {
-        "start": "node src/server.ts",
-        "dev": "nodemon -r dotenv/config src/server.ts",
+        "start": "node dist/server.js",
+        "dev": "nodemon -r dotenv/config --files src/server.ts",
         "newman": "./postman/test.sh",
         "lint": "eslint src/",
         "build": "rm -rf ./dist && tsc"

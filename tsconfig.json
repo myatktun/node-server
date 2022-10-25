@@ -3,8 +3,9 @@
         "allowJs": true,
         "target": "es2016",
         "module": "commonjs",
-        "types": [
-            "./typings"
+        "typeRoots": [
+            "./types",
+            "./node_modules/@types"
         ],
         "sourceMap": true,
         "outDir": "./dist",
@@ -16,10 +17,18 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noImplicitReturns": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "*",
+                "./types/*"
+            ]
+        }
     },
     "include": [
-        "src/**/*"
+        "src/**/*",
+        "types/**/*"
     ],
     "exclude": [
         "src/**/*.dev.ts"

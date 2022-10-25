@@ -3,7 +3,6 @@ import Books from "../models/Book"
 import Notes from "../models/Note"
 import { Request } from "express"
 import { PipelineStage } from "mongoose"
-import { QueryDB, Data } from "../../../typings"
 
 const calcMisc = async (query: { page: number, limit: number }): Promise<[number, number, number]> => {
     const page = query.page || 1

@@ -1,20 +1,19 @@
-import { Document } from "mongoose"
+// declare global {
 
-export interface Result {
+interface Result {
     total: [{ total: number }]
     data: Book[]
     latest: object
 
 }
 
-export interface QueryDB {
+interface QueryDB {
     result: Result[]
     page: number
     limit: number
 }
 
-export interface Book {
-    _id: string
+interface Book {
     book: string
     author: string
     category: string
@@ -24,7 +23,7 @@ export interface Book {
     read: string
 }
 
-export interface Data {
+interface Data {
     totalResults: number
     totalPages: number
     page: number
@@ -33,7 +32,7 @@ export interface Data {
     latest: object
 }
 
-export interface IUser extends Document {
+interface IUser {
     name: string
     password: string
     salt: string
@@ -41,3 +40,5 @@ export interface IUser extends Document {
     createJWT: () => Promise<string>
     validPassword: (password: string) => Promise<boolean>
 }
+
+// }

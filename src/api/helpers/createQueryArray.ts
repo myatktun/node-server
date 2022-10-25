@@ -23,7 +23,7 @@ const createQueryArray = async (req: Request, limit: number, skip: number): Prom
             }
         }
     ]
-    if (query.sort) {
+    if (query.sort && query.sortOrder) {
         const enum sortOrder { ascending = -1, descending }
         mainQueryArray.unshift(
             {

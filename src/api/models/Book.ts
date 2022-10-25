@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const BookSchema = new mongoose.Schema({
+const BookSchema = new mongoose.Schema<Book>({
     book: String,
     author: {
         type: String,
@@ -28,6 +28,6 @@ const BookSchema = new mongoose.Schema({
     category: {
         type: String
     }
-}, { versionKey: false })
+}, { versionKey: false, })
 
-export default mongoose.model("Books", BookSchema)
+export default mongoose.model<Book>("Books", BookSchema)

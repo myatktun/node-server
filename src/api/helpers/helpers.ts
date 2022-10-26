@@ -12,9 +12,6 @@ const calcMisc = async (query: { page: number, limit: number }): Promise<[number
 }
 
 const cleanReq = async (req: Request): Promise<{ queryArray: PipelineStage[], page: number, limit: number }> => {
-    if (!req.query.page || !req.query.limit) {
-        throw new Error()
-    }
     const [page, limit, skip] = await calcMisc({ page: Number(req.query.page), limit: Number(req.query.limit) })
     const queryArray: PipelineStage[] = await createQueryArray(req, limit, skip)
     return { queryArray, page, limit }

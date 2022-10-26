@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "allowJs": true,
-        "target": "es2016",
+        "target": "es2015",
         "module": "commonjs",
         "typeRoots": [
             "./types",

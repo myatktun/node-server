@@ -12,12 +12,6 @@ const booksMainQuery = async (search: string, isGetSingleBook: number): Promise<
     return (
         {
             $match: {
-                // $or: [
-                //     { book: { $regex: search, $options: "i" } },
-                //     { author: { $regex: search, $options: "i" } },
-                //     { category: { $regex: search, $options: "i" } },
-                //     { isbn: Number(search) }
-                // ]
                 $or: [
                     {
                         $expr: {
@@ -143,16 +137,7 @@ const Books = async (mainQueryArray: PipelineStage[], search = "", isGetSingleBo
 
     queryArray.unshift(await booksMainQuery(search, isGetSingleBook))
 
-    // if (!search) {
-    //     queryArray.at(-1)["$facet"]["latest"] = [
-    //         {
-    //             $sort: { dateAdded: -1 }
-    //         },
-    //         {
-    //             $limit: 1
-    //         }
-    //     ]
-    // }
+
     return queryArray
 }
 
@@ -167,7 +152,6 @@ const Authors = async (mainQueryArray: PipelineStage[], author = ""): Promise<Pi
         },
         {
             $match: {
-                // _id: { $regex: author, $options: "i" }
                 $expr: {
                     $regexFind: {
                         input: "$_id",
@@ -192,7 +176,6 @@ const Categories = async (mainQueryArray: PipelineStage[], category = ""): Promi
         },
         {
             $match: {
-                // _id: { $regex: category, $options: "i" }
                 $expr: {
                     $regexFind: {
                         input: "$_id",
@@ -219,21 +202,37 @@ const Notes = async (mainQueryArray: PipelineStage[], note = "", isGetSingleNote
         return queryArray
     }
 
-    // queryArray.unshift(
-    //     {
-    //         $match: {
-    //             $or: [
-    //                 { name: { $regex: note, $options: "i" } },
-    //                 { category: { $regex: note, $options: "i" } },
-    //             ]
-    //         }
-    //     },
-    //     {
-    //         $project: {
-    //             data: 0
-    //         }
-    //     }
-    // )
+    queryArray.unshift(
+        {
+            $match: {
+                $or: [
+                    {
+                        $expr: {
+                            $regexFind: {
+                                input: "$name",
+                                regex: note,
+                                options: "i"
+                            }
+                        }
+                    },
+                    {
+                        $expr: {
+                            $regexFind: {
+                                input: "$category",
+                                regex: note,
+                                options: "i"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            $project: {
+                data: 0
+            }
+        }
+    )
     return queryArray
 }
 

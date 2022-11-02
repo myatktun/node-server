@@ -2,8 +2,8 @@ import express from "express"
 import cors from "cors"
 import helmet from "helmet"
 
-import connectDB from "./api/db/connect"
-import routes from "./api/routes/routes"
+import connectDB from "./db/connect"
+import routes from "./routes/routes"
 
 const app = express()
 const PORT = process.env.PORT || 5000

@@ -1,19 +1,17 @@
-// declare global {
-
-interface Result {
+export interface Result {
     total: [{ total: number }]
     data: Book[]
     latest: object
 
 }
 
-interface QueryDB {
+export interface QueryDB {
     result: Result[]
     page: number
     limit: number
 }
 
-interface Book {
+export interface Book {
     book: string
     author: string
     category: string
@@ -23,7 +21,7 @@ interface Book {
     read: string
 }
 
-interface Data {
+export interface Data {
     totalResults: number
     totalPages: number
     page: number
@@ -32,7 +30,7 @@ interface Data {
     latest: object
 }
 
-interface IUser {
+export interface IUser {
     name: string
     password: string
     salt: string
@@ -40,5 +38,3 @@ interface IUser {
     createJWT: () => Promise<string>
     validPassword: (password: string) => Promise<boolean>
 }
-
-// }

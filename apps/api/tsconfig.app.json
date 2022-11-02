@@ -1,14 +1,13 @@
 {
+    "extends": "./tsconfig.json",
     "compilerOptions": {
         "allowJs": true,
-        "target": "es2015",
-        "module": "commonjs",
         "typeRoots": [
             "./types",
             "./node_modules/@types"
         ],
-        "sourceMap": true,
-        "outDir": "./dist",
+        "outDir": "../../dist/out-tsc",
+        "module": "commonjs",
         "removeComments": true,
         "noEmitOnError": true,
         "esModuleInterop": true,
@@ -18,20 +17,14 @@
         "noUnusedParameters": true,
         "noImplicitReturns": true,
         "skipLibCheck": true,
-        "baseUrl": ".",
-        "paths": {
-            "*": [
-                "*",
-                "./types/*"
-            ]
-        }
     },
-    "include": [
-        "src/**/*",
-        "types/**/*"
-    ],
     "exclude": [
-        "src/**/*.dev.ts"
+        "jest.config.ts",
+        "**/*.spec.ts",
+        "**/*.test.ts"
+    ],
+    "include": [
+        "**/*.ts"
     ],
     "watchOptions": {
         "watchFile": "useFsEvents",
@@ -43,7 +36,7 @@
             "_build"
         ],
         "excludeFiles": [
-            "src/**/*.dev.ts"
+            "./src/**/*.test.ts"
         ]
     }
 }

@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose"
 import jwt from "jsonwebtoken"
 import { randomBytes, scryptSync } from "crypto"
-import { IUser } from '@node-server/api-interfaces'
+import { IUser } from "@projectx/api-interfaces"
 
 const UserSchema = new Schema<IUser>({
     name: {

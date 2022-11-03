@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { Book } from '@node-server/api-interfaces'
+import { Book } from "@projectx/api-interfaces"
 
 const BookSchema = new mongoose.Schema<Book>({
     book: String,

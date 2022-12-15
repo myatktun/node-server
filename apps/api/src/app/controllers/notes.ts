@@ -13,7 +13,7 @@ export const getFromNotes = async (req: Request, res: Response): Promise<Respons
                 latest: latest
             })
         }
-        return res.status(404).send({ total: totalResults, msg: "No notes found" })
+        return res.status(404).send({ total: totalResults, msg: `No results for "${req.query.search}"` })
 
     } catch (error) {
         console.log(error)

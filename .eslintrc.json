@@ -40,7 +40,24 @@
             "extends": [
                 "plugin:@nrwl/nx/typescript"
             ],
-            "rules": {}
+            "rules": {
+                "@typescript-eslint/indent": [
+                    "error",
+                    4
+                ],
+                "quotes": [
+                    "error",
+                    "double",
+                    {
+                        "avoidEscape": true,
+                        "allowTemplateLiterals": true
+                    }
+                ],
+                "semi": [
+                    "error",
+                    "never"
+                ]
+            }
         },
         {
             "files": [

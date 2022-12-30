@@ -8,7 +8,10 @@
         "start": "nx serve",
         "build": "nx build",
         "test": "nx test",
-        "lint": "nx lint"
+        "lint": "nx lint",
+        "dev:up": "docker compose -f docker-compose.dev.yml up --build -d",
+        "dev:down": "docker compose -f docker-compose.dev.yml down -v && docker image prune -f",
+        "dev:restart": "docker compose -f docker-compose.dev.yml restart"
     },
     "dependencies": {
         "@nrwl/linter": "^15.4.2",

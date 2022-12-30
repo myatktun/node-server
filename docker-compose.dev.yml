@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  api:
+    image: api:latest
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile.dev
+    container_name: api
+    ports:
+      - "5000:80"
+    volumes:
+      - ./node_modules:/usr/src/app/node_modules
+      - ./apps/api:/usr/src/app/apps/api:z
+      - ./libs:/usr/src/app/libs:z
+    depends_on:
+      - mongodb
+    env_file:
+      - ./apps/api/.env.docker
+    restart: "no"
+
+  db:
+    image: mongo:latest
+    container_name: db
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+    volumes:
+      - ${MONGO_PATH}:/data/db
+    restart: "always"
+
+networks:
+  my_network:
+    external: true

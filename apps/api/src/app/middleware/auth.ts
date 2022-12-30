@@ -1,7 +1,11 @@
 import jwt from "jsonwebtoken"
 import { Request, Response, NextFunction } from "express"
 
-const checkToken = async (res: Response, authHeader: string, next: NextFunction): Promise<void | Response> => {
+const checkToken = async (
+    res: Response,
+    authHeader: string,
+    next: NextFunction
+): Promise<void | Response> => {
     const token = authHeader.split(" ")[1]
 
     try {
@@ -15,7 +19,11 @@ const checkToken = async (res: Response, authHeader: string, next: NextFunction)
     }
 }
 
-const auth = async (req: Request, res: Response, next: NextFunction): Promise<void | Response> => {
+const auth = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void | Response> => {
     const authHeader = req.headers.authorization
 
     if (!authHeader || !authHeader.startsWith("Bearer")) {

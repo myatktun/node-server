@@ -5,15 +5,23 @@ import { Request } from "express"
 import { PipelineStage } from "mongoose"
 import { QueryDB, Data } from "@projectx/api-interfaces"
 
-const calcMisc = async (query: { page: number, limit: number }): Promise<[number, number, number]> => {
+const calcMisc = async (query: {
+    page: number
+    limit: number
+}): Promise<[number, number, number]> => {
     const page = query.page || 1
     const limit = query.limit || 20
     const skip = (page - 1) * limit
     return [page, limit, skip]
 }
 
-const cleanReq = async (req: Request): Promise<{ queryArray: PipelineStage[], page: number, limit: number }> => {
-    const [page, limit, skip] = await calcMisc({ page: Number(req.query.page), limit: Number(req.query.limit) })
+const cleanReq = async (
+    req: Request
+): Promise<{ queryArray: PipelineStage[]; page: number; limit: number }> => {
+    const [page, limit, skip] = await calcMisc({
+        page: Number(req.query.page),
+        limit: Number(req.query.limit),
+    })
     const queryArray: PipelineStage[] = await createQueryArray(req, limit, skip)
     return { queryArray, page, limit }
 }
@@ -39,6 +47,6 @@ export const getData = async (req: Request): Promise<Data> => {
 export const updateData = async (req: Request): Promise<void> => {
     await Books.findOneAndUpdate({ book: req.params.book }, req.body, {
         new: true,
-        runValidators: true
+        runValidators: true,
     })
 }

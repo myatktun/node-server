@@ -10,10 +10,7 @@
         "importHelpers": true,
         "target": "es2015",
         "module": "esnext",
-        "lib": [
-            "es2017",
-            "dom"
-        ],
+        "lib": ["es2017", "dom"],
         "removeComments": true,
         "noEmitOnError": true,
         "esModuleInterop": true,
@@ -26,13 +23,8 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@projectx/api-interfaces": [
-                "libs/api-interfaces/src/index.ts"
-            ]
+            "@projectx/api-interfaces": ["libs/api-interfaces/src/index.ts"]
         }
     },
-    "exclude": [
-        "node_modules",
-        "tmp"
-    ]
+    "exclude": ["node_modules", "tmp"]
 }

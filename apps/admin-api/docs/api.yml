@@ -1,0 +1,144 @@
+openapi: 3.0.0
+
+info:
+  title: Admin API
+  description: API to update data about books, authors, categories and related notes
+  version: 0.1.0
+
+servers:
+  - url: "admin-api/v1"
+
+paths:
+  /login:
+    post:
+      summary: Authenticate user
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Credentials"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+
+  /signup:
+    post:
+      summary: Authenticate user
+      operationId: signup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUser"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserCreatedResponse"
+
+  /books:
+    post:
+      summary: Add multiple books
+      operationId: addBooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Books"
+      responses:
+        "200":
+          description: Books added successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BooksAddedResponse"
+
+components:
+  schemas:
+    LoginResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        token:
+          type: string
+
+    BooksAddedResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+
+    UserCreatedResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+
+    Credentials:
+      type: object
+      required:
+        - name
+        - password
+      properties:
+        name:
+          type: string
+        password:
+          type: string
+
+    CreateUser:
+      allOf:
+        - $ref: "#/components/schemas/Credentials"
+        - required:
+          - secretKey
+          properties:
+            name:
+              type: string
+            password:
+              type: string
+            secretKey:
+              type: string
+
+    Book:
+      type: object
+      required:
+        - name
+        - category
+        - isbn
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        author:
+          type: string
+        isbn:
+          type: integer
+        olid:
+          type: string
+        status:
+          type: string
+          enum:
+            - new
+            - reading
+            - finished
+        dateAdded:
+          type: string
+        category:
+          type: string
+
+    Books:
+      type: array
+      items:
+        allOf:
+          - $ref: "#/components/schemas/Book"

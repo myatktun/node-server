@@ -1,0 +1,11 @@
+.openapi-generator-ignore
+Apis/DefaultApi.md
+Models/Book.md
+Models/BooksAddedResponse.md
+Models/Books_inner.md
+Models/CreateUser.md
+Models/CreateUser_allOf.md
+Models/Credentials.md
+Models/LoginResponse.md
+Models/UserCreatedResponse.md
+README.md

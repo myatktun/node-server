@@ -2,7 +2,6 @@ export interface Result {
     total: [{ total: number }]
     data: Book[]
     latest: object
-
 }
 
 export interface QueryDB {
@@ -12,7 +11,7 @@ export interface QueryDB {
 }
 
 export interface Book {
-    book: string
+    name: string
     author: string
     category: string
     dateAdded: string

@@ -19,7 +19,6 @@ const UserSchema = new Schema<IUser>(
 )
 
 UserSchema.pre("save", async function () {
-    console.log("here")
     this.salt = randomBytes(16).toString("base64")
     this.password = scryptSync(this.password as string, this.salt, 64).toString(
         "base64"

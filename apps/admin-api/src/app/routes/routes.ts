@@ -1,13 +1,13 @@
 import express from "express"
 
 import { login, signup } from "../controllers/user"
-// import { postToBooks } from "../controllers/books"
+import { addBooks } from "../controllers/books"
 
-// import auth from "../middleware/auth"
+import auth from "../middleware/auth"
 
 const router = express.Router()
 
-// router.route("/books/:book").patch(auth, postToBooks)
+router.route("/books").post(auth, addBooks)
 router.route("/login").post(login)
 router.route("/signup").post(signup)
 

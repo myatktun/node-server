@@ -21,7 +21,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
 
     return res
         .status(200)
-        .json({ name: user.name, token: await user.createJWT() })
+        .send({ name: user.name, token: await user.createJWT() })
 }
 
 export const signup = async (
@@ -36,17 +36,17 @@ export const signup = async (
     if (secret !== process.env.SECRET_KEY) {
         return res
             .status(404)
-            .send({ msg: "Invalid secret key to create User" })
+            .send({ msg: "Invalid secret key to create user" })
     }
 
     if (await User.findOne({ name })) {
-        return res.status(404).json({ msg: "User already exists" })
+        return res.status(404).send({ msg: "User already exists" })
     }
 
     const user = await User.create({ name, password })
     if (!user) {
-        return res.status(404).json({ msg: "Error creating User" })
+        return res.status(404).send({ msg: "Error creating user" })
     }
 
-    return res.status(201).json({ msg: "user Created" })
+    return res.status(201).send({ msg: "User created" })
 }

@@ -221,8 +221,6 @@ components:
       required:
         - name
       properties:
-        _id:
-          type: string
         name:
           type: string
         books:
@@ -266,8 +264,6 @@ components:
           type: string
         name:
           type: string
-        data:
-          type: string
         category:
           type: string
 
@@ -291,3 +287,7 @@ components:
               items:
                 allOf:
                   - $ref: "#/components/schemas/Note"
+                  - type: object
+                    properties:
+                      data:
+                        type: string

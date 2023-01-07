@@ -3,7 +3,6 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **\_id** | **String** |  | [optional] [default to null] |
 | **name** | **String** |  | [default to null] |
 | **books** | [**List**](Author_books_inner.md) |  | [optional] [default to null] |
 

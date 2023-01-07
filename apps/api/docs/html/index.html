@@ -693,9 +693,6 @@
   "required" : [ "name" ],
   "type" : "object",
   "properties" : {
-    "_id" : {
-      "type" : "string"
-    },
     "name" : {
       "type" : "string"
     },
@@ -787,9 +784,6 @@
       "type" : "string"
     },
     "name" : {
-      "type" : "string"
-    },
-    "data" : {
       "type" : "string"
     },
     "category" : {
@@ -890,6 +884,13 @@
         "items" : {
           "allOf" : [ {
             "$ref" : "#/components/schemas/Note"
+          }, {
+            "type" : "object",
+            "properties" : {
+              "data" : {
+                "type" : "string"
+              }
+            }
           } ]
         }
       }

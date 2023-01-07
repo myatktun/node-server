@@ -43,21 +43,20 @@ const createQueryArray = async (
     }
 
     if (route.path.includes("/books")) {
-        if (route.path.includes("/authors")) {
-            return await Authors(
-                mainQueryArray,
-                <string>query.search || params.author
-            )
-        } else if (route.path.includes("/categories")) {
-            return await Categories(
-                mainQueryArray,
-                <string>query.search || params.category
-            )
-        }
         return await Books(
             mainQueryArray,
             <string>query.search || params.book,
             Object.keys(params).length
+        )
+    } else if (route.path.includes("/authors")) {
+        return await Authors(
+            mainQueryArray,
+            <string>query.search || params.author
+        )
+    } else if (route.path.includes("/categories")) {
+        return await Categories(
+            mainQueryArray,
+            <string>query.search || params.category
         )
     }
     return await Notes(

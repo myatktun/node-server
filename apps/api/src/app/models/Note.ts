@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
+import { Note } from "@projectx/api-interfaces"
 
-const NotesSchema = new mongoose.Schema(
+const NotesSchema = new mongoose.Schema<Note>(
     {
         name: {
             type: String,

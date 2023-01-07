@@ -31,6 +31,12 @@ const queryDB = async (req: Request): Promise<QueryDB> => {
     if (req.route.path.includes("/books")) {
         const result = await Books.aggregate(queryArray)
         return { result, page, limit }
+    } else if (req.route.path.includes("/authors")) {
+        const result = await Books.aggregate(queryArray)
+        return { result, page, limit }
+    } else if (req.route.path.includes("/categories")) {
+        const result = await Books.aggregate(queryArray)
+        return { result, page, limit }
     }
     const result = await Notes.aggregate(queryArray)
     return { result, page, limit }
@@ -42,11 +48,4 @@ export const getData = async (req: Request): Promise<Data> => {
     const totalResults = total[0] ? total[0].total : 0
     const totalPages = Math.ceil(totalResults / limit)
     return { totalResults, totalPages, page, limit, data, latest }
-}
-
-export const updateData = async (req: Request): Promise<void> => {
-    await Books.findOneAndUpdate({ book: req.params.book }, req.body, {
-        new: true,
-        runValidators: true,
-    })
 }

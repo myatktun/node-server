@@ -3,7 +3,7 @@ import { Book } from "@projectx/api-interfaces"
 
 const BookSchema = new mongoose.Schema<Book>(
     {
-        book: String,
+        name: String,
         author: {
             type: String,
             default: "unknown",

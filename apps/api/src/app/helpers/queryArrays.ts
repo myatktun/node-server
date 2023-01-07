@@ -1,4 +1,4 @@
-import { PipelineStage } from "mongoose"
+import { PipelineStage, Types } from "mongoose"
 
 const booksMainQuery = async (
     search: string,
@@ -6,7 +6,7 @@ const booksMainQuery = async (
 ): Promise<PipelineStage.Match> => {
     if (isGetSingleBook) {
         return {
-            $match: { book: search },
+            $match: { _id: new Types.ObjectId(`${search}`) },
         }
     }
 
@@ -146,14 +146,21 @@ const Authors = async (
         {
             $group: {
                 _id: "$author",
-                books: { $addToSet: "$book" },
+                books: { $addToSet: "$name" },
+            },
+        },
+        {
+            $project: {
+                _id: 0,
+                name: "$_id",
+                books: "$books",
             },
         },
         {
             $match: {
                 $expr: {
                     $regexFind: {
-                        input: "$_id",
+                        input: "$name",
                         regex: author,
                         options: "i",
                     },
@@ -173,14 +180,21 @@ const Categories = async (
         {
             $group: {
                 _id: "$category",
-                books: { $addToSet: "$book" },
+                books: { $addToSet: "$name" },
+            },
+        },
+        {
+            $project: {
+                _id: 0,
+                name: "$_id",
+                books: "$books",
             },
         },
         {
             $match: {
                 $expr: {
                     $regexFind: {
-                        input: "$_id",
+                        input: "$name",
                         regex: category,
                         options: "i",
                     },
@@ -201,7 +215,7 @@ const Notes = async (
 
     if (isGetSingleNote) {
         queryArray.unshift({
-            $match: { name: note },
+            $match: { _id: new Types.ObjectId(`${note}`) },
         })
         return queryArray
     }

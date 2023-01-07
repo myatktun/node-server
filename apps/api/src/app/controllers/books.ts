@@ -1,7 +1,7 @@
-import { getData, updateData } from "../helpers/helpers"
+import { getData } from "../helpers/helpers"
 import { Request, Response } from "express"
 
-export const getFromBooks = async (
+export const getBooks = async (
     req: Request,
     res: Response
 ): Promise<Response> => {
@@ -27,23 +27,5 @@ export const getFromBooks = async (
     } catch (error) {
         console.log(error)
         return res.status(404).send({ msg: "Something went wrong" })
-    }
-}
-
-export const postToBooks = async (
-    req: Request,
-    res: Response
-): Promise<Response> => {
-    try {
-        if (req.body.read) {
-            await updateData(req)
-            return res
-                .status(200)
-                .send({ msg: `Updated book: ${req.params.book}` })
-        }
-        return res.status(200).send({ msg: "No data to update" })
-    } catch (error) {
-        console.log(error)
-        return res.status(404).send({ msg: "Invalid data provided" })
     }
 }

@@ -1,5 +1,15 @@
 import { addData } from "../helpers/helpers"
 import { Request, Response } from "express"
+import { createProxyMiddleware } from "http-proxy-middleware"
+
+if (!process.env.MAIN_API) {
+    throw new Error("Invalid API to forward")
+}
+
+export const getBooks = createProxyMiddleware({
+    target: process.env.MAIN_API,
+    changeOrigin: true,
+})
 
 export const addBooks = async (
     req: Request,

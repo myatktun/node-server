@@ -20,6 +20,12 @@ export interface Book {
     read: string
 }
 
+export interface Note {
+    name: string
+    data: string
+    category: string
+}
+
 export interface Data {
     totalResults: number
     totalPages: number
@@ -36,4 +42,14 @@ export interface IUser {
     role: string
     createJWT: () => Promise<string>
     validPassword: (password: string) => Promise<boolean>
+}
+
+export interface Author {
+    _id: string
+    books: Array<string>
+}
+
+export interface Category {
+    _id: string
+    books: Array<string>
 }

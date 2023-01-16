@@ -5,7 +5,7 @@ import { SearchBar } from "./search-bar/search-bar"
 /* eslint-disable-next-line */
 export interface SharedUiHeaderProps {}
 
-const StyledSharedUiHeader = styled.div`
+const StyledSharedUiHeader = styled.nav`
     background-color: #1d2021;
     color: black;
     display: flex;

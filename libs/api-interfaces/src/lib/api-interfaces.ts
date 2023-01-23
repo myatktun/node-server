@@ -45,11 +45,11 @@ export interface IUser {
 }
 
 export interface Author {
-    _id: string
+    name: string
     books: Array<string>
 }
 
 export interface Category {
-    _id: string
+    name: string
     books: Array<string>
 }

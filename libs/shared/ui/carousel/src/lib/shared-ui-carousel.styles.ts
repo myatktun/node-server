@@ -21,12 +21,13 @@ export const StyledSharedUiCarousel = styled.div`
 
     .wrapper {
         max-width: 90%;
-        margin: 0 20px;
+        margin: 10px 20px;
     }
 
     .wrapper .slider {
         cursor: pointer;
         max-width: 1200px;
+        height: 200px;
         overflow: hidden;
         white-space: nowrap;
         scroll-behavior: smooth;
@@ -40,7 +41,7 @@ export const StyledSharedUiCarousel = styled.div`
         background-color: #757575;
         vertical-align: top;
         padding: 10px;
-        height: 200px;
+        height: 100%;
         margin-left: 10px;
         width: calc(100% / 5);
     }
@@ -65,41 +66,4 @@ export const StyledSharedUiCarousel = styled.div`
         background-color: rgba(40, 40, 40, 0.5);
         transform: scale(1.1);
     }
-`
-
-export const Wrapper = styled.div`
-    /* width: 100%; */
-    /* height: 100%; */
-    /* min-height: 300px; */
-    /* max-width: 720px; */
-    /* background-color: var(--darkGrey); */
-    /* color: white; */
-    /* transition: all 0.3s; */
-    /* border-radius: 20px; */
-    /* animation: animateThumb 0.5s; */
-    text-align: center;
-
-    /* :hover { */
-    /*     opacity: 0.8; */
-    /*     cursor: pointer; */
-    /* } */
-    /* @keyframes animateThumb { */
-    /*     from { */
-    /*         opacity: 0; */
-    /*     } */
-    /*     to { */
-    /*         opacity: 1; */
-    /*     } */
-    /* } */
-`
-
-export const Text = styled.div`
-    color: var(--white);
-    text-align: center;
-    /* max-width: 10px; */
-    /* border-radius: 20px 20px 0 0; */
-    /* padding: 5px 10px 20px 10px; */
-    /* @media screen and (max-width: 768px) { */
-    /*     font-size: 300px; */
-    /* } */
 `

@@ -1,12 +1,14 @@
 import { useRef } from "react"
 import { StyledSharedUiCarousel } from "./shared-ui-carousel.styles"
 import { useQuery } from "react-query"
-import { Book, Author } from "@projectx/api-interfaces"
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from "@mui/icons-material"
 
-/* eslint-disable-next-line */
-export interface SharedUiCarouselProps {
+interface SharedUiCarouselProps {
     title: string
+}
+
+interface Item {
+    name: string
 }
 
 export const SharedUiCarousel = (props: SharedUiCarouselProps) => {
@@ -38,28 +40,11 @@ export const SharedUiCarousel = (props: SharedUiCarouselProps) => {
                     onClick={() => moveSlider("left")}
                 />
                 <div className="wrapper">
-                    {/* <Books sliderRef={sliderRef} /> */}
-                    {props.title.toLowerCase() === "books" ? (
-                        <div className="slider" ref={sliderRef}>
-                            {data.results.map((item: Book) => (
-                                <DefaultThumb
-                                    key={item.name}
-                                    title={item.name}
-                                    author={item.author}
-                                />
-                            ))}
-                        </div>
-                    ) : (
-                        <div className="slider" ref={sliderRef}>
-                            {data.results.map((item: Author) => (
-                                <DefaultThumb
-                                    key={item.name}
-                                    title={item.name}
-                                    author={item.name}
-                                />
-                            ))}
-                        </div>
-                    )}
+                    <div className="slider" ref={sliderRef}>
+                        {data.results.map((item: Item) => (
+                            <DefaultThumb key={item.name} title={props.title} item={item} />
+                        ))}
+                    </div>
                 </div>
                 <ArrowForwardIosOutlined
                     className="sliderArrow right"
@@ -70,44 +55,23 @@ export const SharedUiCarousel = (props: SharedUiCarouselProps) => {
     )
 }
 
-// const Books = forwardRef((sliderRef) => {
-//     const { isLoading, error, data } = useQuery("booksData", () =>
-//         fetch("http://localhost:5001/v1/books").then((res) => res.json())
-//     )
-
-//     if (isLoading) return <div>"Loading..."</div>
-//     if (error) return <div>"Error..."</div>
-
-//     return (
-//         <div className="slider" ref={sliderRef}>
-//             {data.results.map((book: Book) => (
-//                 <DefaultThumb
-//                     key={book.name}
-//                     title={book.name}
-//                     author={book.author}
-//                 />
-//             ))}
-//         </div>
-//     )
-// })
-
-const DefaultThumb = (props: DefaultThumbProps) => {
-    return (
-        /* <Wrapper className="wrapper"> */
-        /*     <p>{props.title}</p> */
-        /*     <p>{props.author}</p> */
-        /* </Wrapper> */
-        <div className="listItem">
-            {props.title}
-            {"\nAuthor: "}
-            {props.author}
-        </div>
-    )
-}
-
 interface DefaultThumbProps {
     title: string
-    author: string
+    item: { name: string; author?: string }
+}
+
+const DefaultThumb = (props: DefaultThumbProps) => {
+    if (props.title === "Books") {
+        return (
+            <div className="listItem">
+                {props.item.name}
+                {"\nAuthor: "}
+                {props.item.author}
+            </div>
+        )
+    }
+
+    return <div className="listItem">{props.item.name}</div>
 }
 
 export default SharedUiCarousel

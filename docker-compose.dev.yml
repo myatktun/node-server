@@ -30,7 +30,7 @@ services:
       - ./apps/api:/usr/src/app/apps/api:z
       - ./libs:/usr/src/app/libs:z
     depends_on:
-      - mongodb
+      - db
     env_file:
       - ./apps/api/.env.docker
     restart: "no"
@@ -48,7 +48,7 @@ services:
       - ./apps/admin-api:/usr/src/app/apps/admin-api:z
       - ./libs:/usr/src/app/libs:z
     depends_on:
-      - mongodb
+      - db
     env_file:
       - ./apps/admin-api/.env.docker
     restart: "no"

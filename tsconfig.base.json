@@ -24,7 +24,12 @@
         "baseUrl": ".",
         "paths": {
             "@projectx/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-            "@projectx/shared/ui/carousel": ["libs/shared/ui/carousel/src/index.ts"],
+            "@projectx/shared/ui/carousel": [
+                "libs/shared/ui/carousel/src/index.ts"
+            ],
+            "@projectx/shared/ui/footer": [
+                "libs/shared/ui/footer/src/index.ts"
+            ],
             "@projectx/shared/ui/header": ["libs/shared/ui/header/src/index.ts"]
         }
     },

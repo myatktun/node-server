@@ -4,7 +4,7 @@ export const StyledSharedUiHeader = styled.nav`
     background-color: #1d2021;
     color: black;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 30px 10%;
     flex-wrap: wrap;

@@ -1,32 +1,36 @@
 import styled from "styled-components"
 
 export const StyledSharedUiCarousel = styled.div`
-    background-color: #282828;
     color: white;
-    padding: 10px 20px;
+    padding: 20px;
 
     .title {
-        color: white;
+        color: #ebdbb2;
         font-weight: 900;
         font-size: 30px;
-        margin-left: 10px;
+        margin-left: 100px;
+        cursor: pointer;
+    }
+
+    .title:hover {
+        color: #458588;
     }
 
     .carousel {
         margin-top: 10px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
     }
 
     .wrapper {
-        max-width: 90%;
+        max-width: 1200px;
+        width: 90%;
         margin: 10px 20px;
     }
 
     .wrapper .slider {
         cursor: pointer;
-        max-width: 1200px;
         height: 200px;
         overflow: hidden;
         white-space: nowrap;
@@ -42,15 +46,19 @@ export const StyledSharedUiCarousel = styled.div`
         vertical-align: top;
         padding: 10px;
         height: 100%;
-        margin-left: 10px;
-        width: calc(100% / 5);
+        margin-left: 2rem;
+        width: calc(100% / 7);
+    }
+
+    .slider .listItem:first-child {
+        margin-left: 0;
     }
 
     .sliderArrow {
         height: 100%;
-        width: 46px;
         cursor: pointer;
         z-index: 999;
+        color: #ebdbb2;
     }
 
     .sliderArrow.left {
@@ -64,6 +72,17 @@ export const StyledSharedUiCarousel = styled.div`
     .sliderArrow:hover,
     .sliderArrow:focus {
         background-color: rgba(40, 40, 40, 0.5);
-        transform: scale(1.1);
+        transform: scale(1.3);
+        color: #458588;
+    }
+
+    @media screen and (max-width: 800px) {
+        .slider .listItem {
+            width: calc(100% / 3);
+        }
+
+        .title {
+            margin-left: 0;
+        }
     }
 `

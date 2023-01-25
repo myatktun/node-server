@@ -5,6 +5,7 @@ import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from "@mui/icons-materi
 
 interface SharedUiCarouselProps {
     title: string
+    index: number
 }
 
 interface Item {
@@ -13,6 +14,7 @@ interface Item {
 
 export const SharedUiCarousel = (props: SharedUiCarouselProps) => {
     const sliderRef = useRef(document.createElement("div"))
+    const even = props.index % 2 === 0
 
     const moveSlider = (direction: string) => {
         if (direction === "right") {
@@ -32,7 +34,7 @@ export const SharedUiCarousel = (props: SharedUiCarouselProps) => {
     if (error) return <div>"Error..."</div>
 
     return (
-        <StyledSharedUiCarousel>
+        <StyledSharedUiCarousel style={{ backgroundColor: even ? "#282828" : "#1d2021" }}>
             <span className="title">{props.title}</span>
             <div className="carousel">
                 <ArrowBackIosOutlined

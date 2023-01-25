@@ -2,6 +2,7 @@ import { useRef } from "react"
 import { StyledSharedUiCarousel } from "./carousel.styles"
 import { useQuery } from "react-query"
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from "@mui/icons-material"
+import Thumb from "../thumb/thumb"
 
 interface SharedUiCarouselProps {
     title: string
@@ -44,7 +45,7 @@ export const Carousel = (props: SharedUiCarouselProps) => {
                 <div className="wrapper">
                     <div className="slider" ref={sliderRef}>
                         {data.results.map((item: Item) => (
-                            <DefaultThumb key={item.name} title={props.title} item={item} />
+                            <Thumb key={item.name} title={props.title} item={item} />
                         ))}
                     </div>
                 </div>
@@ -55,25 +56,6 @@ export const Carousel = (props: SharedUiCarouselProps) => {
             </div>
         </StyledSharedUiCarousel>
     )
-}
-
-interface DefaultThumbProps {
-    title: string
-    item: { name: string; author?: string }
-}
-
-const DefaultThumb = (props: DefaultThumbProps) => {
-    if (props.title === "Books") {
-        return (
-            <div className="listItem">
-                {props.item.name}
-                {"\nAuthor: "}
-                {props.item.author}
-            </div>
-        )
-    }
-
-    return <div className="listItem">{props.item.name}</div>
 }
 
 export default Carousel

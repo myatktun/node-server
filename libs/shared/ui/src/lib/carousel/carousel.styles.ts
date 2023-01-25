@@ -47,10 +47,21 @@ export const StyledSharedUiCarousel = styled.div`
         padding: 10px;
         height: 100%;
         margin-left: 2rem;
-        width: calc(100% / 7);
+        width: calc(100% / 6);
     }
 
     .slider .listItem:first-child {
+        margin-left: 0;
+    }
+
+    .slider .listItemImg {
+        padding: 10px;
+        height: 100%;
+        margin-left: 1rem;
+        width: calc(100% / 6);
+    }
+
+    .slider .listItemImg:first-child {
         margin-left: 0;
     }
 
@@ -71,18 +82,33 @@ export const StyledSharedUiCarousel = styled.div`
 
     .sliderArrow:hover,
     .sliderArrow:focus {
-        background-color: rgba(40, 40, 40, 0.5);
-        transform: scale(1.3);
+        transform: scale(1.5);
         color: #458588;
     }
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 1400px) {
+        .title {
+            margin-left: 10px;
+        }
+    }
+
+    @media screen and (max-width: 850px) {
         .slider .listItem {
-            width: calc(100% / 3);
+            width: calc(100% / 4);
         }
 
-        .title {
-            margin-left: 0;
+        .slider .listItemImg {
+            width: calc(100% / 4);
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .slider .listItem {
+            width: calc(100% / 2);
+        }
+
+        .slider .listItemImg {
+            width: calc(100% / 2);
         }
     }
 `

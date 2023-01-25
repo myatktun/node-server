@@ -1,13 +1,13 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react"
-import { SharedUiCarousel } from "./carousel"
+import { Carousel } from "./carousel"
 
-const Story: ComponentMeta<typeof SharedUiCarousel> = {
-    component: SharedUiCarousel,
-    title: "SharedUiCarousel",
+const Story: ComponentMeta<typeof Carousel> = {
+    component: Carousel,
+    title: "Carousel",
 }
 export default Story
 
-const Template: ComponentStory<typeof SharedUiCarousel> = (args) => <SharedUiCarousel {...args} />
+const Template: ComponentStory<typeof Carousel> = (args) => <Carousel {...args} />
 
 export const Primary = Template.bind({})
 Primary.args = {}

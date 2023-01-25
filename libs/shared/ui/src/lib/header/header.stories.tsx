@@ -1,13 +1,13 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react"
-import { SharedUiHeader } from "./shared-ui-header"
+import { Header } from "./header"
 
-const Story: ComponentMeta<typeof SharedUiHeader> = {
-    component: SharedUiHeader,
-    title: "SharedUiHeader",
+const Story: ComponentMeta<typeof Header> = {
+    component: Header,
+    title: "Header",
 }
 export default Story
 
-const Template: ComponentStory<typeof SharedUiHeader> = (args) => <SharedUiHeader {...args} />
+const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />
 
 export const Primary = Template.bind({})
 Primary.args = {}

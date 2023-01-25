@@ -1,6 +1,4 @@
-import { SharedUiHeader } from "@projectx/shared/ui/header"
-import { SharedUiCarousel } from "@projectx/shared/ui/carousel"
-import { SharedUiFooter } from "@projectx/shared/ui/footer"
+import { SharedUiHeader, SharedUiCarousel, SharedUiFooter } from "@projectx/shared/ui"
 import { QueryClient, QueryClientProvider } from "react-query"
 
 const queryClient = new QueryClient()

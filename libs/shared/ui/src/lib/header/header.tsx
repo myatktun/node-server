@@ -5,7 +5,7 @@ import { StyledSharedUiHeader } from "./header.styles"
 /* eslint-disable-next-line */
 export interface SharedUiHeaderProps {}
 
-export function SharedUiHeader() {
+export function Header() {
     return (
         <StyledSharedUiHeader>
             <img src="" alt="Logo" />
@@ -15,4 +15,4 @@ export function SharedUiHeader() {
     )
 }
 
-export default SharedUiHeader
+export default Header

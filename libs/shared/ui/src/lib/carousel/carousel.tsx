@@ -12,7 +12,7 @@ interface Item {
     name: string
 }
 
-export const SharedUiCarousel = (props: SharedUiCarouselProps) => {
+export const Carousel = (props: SharedUiCarouselProps) => {
     const sliderRef = useRef(document.createElement("div"))
     const even = props.index % 2 === 0
 
@@ -76,4 +76,4 @@ const DefaultThumb = (props: DefaultThumbProps) => {
     return <div className="listItem">{props.item.name}</div>
 }
 
-export default SharedUiCarousel
+export default Carousel

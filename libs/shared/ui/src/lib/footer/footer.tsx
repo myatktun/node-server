@@ -6,7 +6,7 @@ import PhoneIcon from "@mui/icons-material/Phone"
 /* eslint-disable-next-line */
 export interface SharedUiFooterProps {}
 
-export function SharedUiFooter() {
+export function Footer() {
     return (
         <StyledSharedUiFooter>
             <About />
@@ -64,4 +64,4 @@ const Contact = () => {
     )
 }
 
-export default SharedUiFooter
+export default Footer

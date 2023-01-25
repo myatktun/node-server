@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 import { StyledMenuBar } from "./menu-bar.styles"
 
 /* eslint-disable-next-line */
@@ -25,15 +26,13 @@ export function MenuBar() {
         <StyledMenuBar>
             <ul>
                 <li>
-                    <a href="#">Books</a>
+                    <Link to="/books">Books</Link>
                 </li>
                 <li>
-                    <a href="#">Notes</a>
+                    <Link to="/notes">Notes</Link>
                 </li>
                 <li ref={menuRef}>
-                    <a href="#" onClick={() => setOpen(!isOpen)}>
-                        Browse
-                    </a>
+                    <p onClick={() => setOpen(!isOpen)}>Browse</p>
                     {isOpen && <MenuDropDown />}
                 </li>
             </ul>
@@ -53,11 +52,12 @@ const MenuDropDown = () => {
 interface MenuDropDownItemProps {
     name: string
 }
+
 const MenuDropDownItem = (props: MenuDropDownItemProps) => {
     return (
-        <a href="#" className="menu-dropdown-item">
+        <Link to="/books" className="menu-dropdown-item">
             {props.name}
-        </a>
+        </Link>
     )
 }
 

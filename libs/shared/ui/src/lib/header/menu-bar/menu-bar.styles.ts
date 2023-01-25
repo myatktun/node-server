@@ -32,6 +32,15 @@ export const StyledMenuBar = styled.nav`
         color: #458588;
     }
 
+    ul li p {
+        cursor: pointer;
+        transition: all 0.3s ease 0s;
+    }
+
+    ul li p :hover {
+        color: #458588;
+    }
+
     .menu-dropdown-content {
         position: absolute;
         border-radius: 15px;

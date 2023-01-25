@@ -11,6 +11,12 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+
+  #root {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)

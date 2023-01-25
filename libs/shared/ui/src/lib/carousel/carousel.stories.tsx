@@ -1,5 +1,5 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react"
-import { SharedUiCarousel } from "./shared-ui-carousel"
+import { SharedUiCarousel } from "./carousel"
 
 const Story: ComponentMeta<typeof SharedUiCarousel> = {
     component: SharedUiCarousel,

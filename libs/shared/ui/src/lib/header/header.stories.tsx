@@ -7,9 +7,7 @@ const Story: ComponentMeta<typeof SharedUiHeader> = {
 }
 export default Story
 
-const Template: ComponentStory<typeof SharedUiHeader> = (args) => (
-    <SharedUiHeader {...args} />
-)
+const Template: ComponentStory<typeof SharedUiHeader> = (args) => <SharedUiHeader {...args} />
 
 export const Primary = Template.bind({})
 Primary.args = {}

@@ -1,6 +1,6 @@
 import { MenuBar } from "./menu-bar/menu-bar"
 import { SearchBar } from "./search-bar/search-bar"
-import { StyledSharedUiHeader } from "./shared-ui-header.styles"
+import { StyledSharedUiHeader } from "./header.styles"
 
 /* eslint-disable-next-line */
 export interface SharedUiHeaderProps {}

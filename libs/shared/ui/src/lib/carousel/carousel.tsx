@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { StyledSharedUiCarousel } from "./shared-ui-carousel.styles"
+import { StyledSharedUiCarousel } from "./carousel.styles"
 import { useQuery } from "react-query"
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from "@mui/icons-material"
 

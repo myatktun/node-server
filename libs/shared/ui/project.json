@@ -1,7 +1,7 @@
 {
-    "name": "shared-ui-header",
+    "name": "shared-ui",
     "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/shared/ui/header/src",
+    "sourceRoot": "libs/shared/ui/src",
     "projectType": "library",
     "tags": [],
     "targets": {
@@ -9,9 +9,7 @@
             "executor": "@nrwl/linter:eslint",
             "outputs": ["{options.outputFile}"],
             "options": {
-                "lintFilePatterns": [
-                    "libs/shared/ui/header/**/*.{ts,tsx,js,jsx}"
-                ]
+                "lintFilePatterns": ["libs/shared/ui/src/**/*.{ts,tsx,js,jsx}"]
             }
         },
         "storybook": {
@@ -20,7 +18,7 @@
                 "uiFramework": "@storybook/react",
                 "port": 4400,
                 "config": {
-                    "configFolder": "libs/shared/ui/header/.storybook"
+                    "configFolder": "libs/shared/ui/.storybook"
                 }
             },
             "configurations": {
@@ -34,9 +32,9 @@
             "outputs": ["{options.outputPath}"],
             "options": {
                 "uiFramework": "@storybook/react",
-                "outputPath": "dist/storybook/shared-ui-header",
+                "outputPath": "dist/storybook/shared-ui",
                 "config": {
-                    "configFolder": "libs/shared/ui/header/.storybook"
+                    "configFolder": "libs/shared/ui/.storybook"
                 }
             },
             "configurations": {

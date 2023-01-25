@@ -10,10 +10,7 @@ export function MenuBar() {
 
     useEffect(() => {
         const handler = (e: MouseEvent) => {
-            if (
-                menuRef.current !== null &&
-                !menuRef.current.contains(e.target as Node)
-            ) {
+            if (menuRef.current !== null && !menuRef.current.contains(e.target as Node)) {
                 setOpen(false)
             }
         }

@@ -1,10 +1,10 @@
-import { StyledSharedUiFooter } from "./shared-ui-footer.styles"
+import { StyledSharedUiFooter } from "./footer.styles"
 import EmailIcon from "@mui/icons-material/Email"
 import GitHubIcon from "@mui/icons-material/GitHub"
 import PhoneIcon from "@mui/icons-material/Phone"
 
 /* eslint-disable-next-line */
-export interface SharedUiFooterProps { }
+export interface SharedUiFooterProps {}
 
 export function SharedUiFooter() {
     return (

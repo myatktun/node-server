@@ -6,8 +6,8 @@ export const StyledSharedUiFooter = styled.div`
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    padding: 20px;
+    justify-content: space-around;
+    padding: 30px;
 
     .title {
         font-weight: 900;
@@ -20,12 +20,19 @@ export const StyledSharedUiFooter = styled.div`
 
     .body li {
         list-style: none;
-        margin: 0.8rem 0.2rem;
-        font-size: 1.2rem;
+        margin: 0.5rem 0.2rem;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .body .topic:hover,
+    li:hover {
+        color: #458588;
     }
 
     .body .topic {
         display: flex;
         align-items: center;
+        cursor: pointer;
     }
 `

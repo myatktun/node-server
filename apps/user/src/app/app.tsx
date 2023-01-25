@@ -1,16 +1,18 @@
-import { Header, Carousel, Footer } from "@projectx/shared/ui"
 import { QueryClient, QueryClientProvider } from "react-query"
+import { Route, Routes } from "react-router-dom"
+import { Header, Home, Grid, Footer } from "@projectx/shared/ui"
 
 const queryClient = new QueryClient()
-const titles = ["Books", "Notes"]
 
 export function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <Header />
-            {titles.map((title, index) => (
-                <Carousel key={index} title={title} index={index} />
-            ))}
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/books" element={<Grid title={"books"} />} />
+                <Route path="/notes" element={<Grid title={"notes"} />} />
+            </Routes>
             <Footer />
         </QueryClientProvider>
     )

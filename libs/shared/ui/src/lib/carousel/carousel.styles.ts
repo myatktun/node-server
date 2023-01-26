@@ -68,7 +68,6 @@ export const StyledSharedUiCarousel = styled.div`
     .sliderArrow {
         height: 100%;
         cursor: pointer;
-        z-index: 999;
         color: #ebdbb2;
     }
 

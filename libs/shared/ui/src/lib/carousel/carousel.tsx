@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { useRef } from "react"
 import { StyledSharedUiCarousel } from "./carousel.styles"
 import { useQuery } from "react-query"
@@ -13,9 +14,9 @@ interface Item {
     name: string
 }
 
-export const Carousel = (props: SharedUiCarouselProps) => {
+export const Carousel = ({ title, index }: SharedUiCarouselProps) => {
     const sliderRef = useRef(document.createElement("div"))
-    const even = props.index % 2 === 0
+    const even = index % 2 === 0
 
     const moveSlider = (direction: string) => {
         if (direction === "right") {
@@ -25,8 +26,8 @@ export const Carousel = (props: SharedUiCarouselProps) => {
         }
     }
 
-    const { isLoading, error, data } = useQuery(`${props.title.toLowerCase()}Data`, () =>
-        fetch(`http://localhost:5001/v1/${props.title.toLowerCase()}?sort=dateAdded`).then((res) =>
+    const { isLoading, error, data } = useQuery(`${title.toLowerCase()}Data`, () =>
+        fetch(`${process.env.NX_API_URL}/${title.toLowerCase()}?sort=dateAdded`).then((res) =>
             res.json()
         )
     )
@@ -36,7 +37,9 @@ export const Carousel = (props: SharedUiCarouselProps) => {
 
     return (
         <StyledSharedUiCarousel style={{ backgroundColor: even ? "#282828" : "#1d2021" }}>
-            <span className="title">{props.title}</span>
+            <Link to={`${title}`} className="title">
+                {title}
+            </Link>
             <div className="carousel">
                 <ArrowBackIosOutlined
                     className="sliderArrow left"
@@ -45,7 +48,7 @@ export const Carousel = (props: SharedUiCarouselProps) => {
                 <div className="wrapper">
                     <div className="slider" ref={sliderRef}>
                         {data.results.map((item: Item) => (
-                            <Thumb key={item.name} title={props.title} item={item} />
+                            <Thumb key={item.name} title={title} item={item} />
                         ))}
                     </div>
                 </div>

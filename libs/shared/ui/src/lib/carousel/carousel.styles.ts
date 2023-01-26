@@ -10,6 +10,7 @@ export const StyledSharedUiCarousel = styled.div`
         font-size: 30px;
         margin-left: 100px;
         cursor: pointer;
+        text-decoration: none;
     }
 
     .title:hover {
@@ -50,7 +51,8 @@ export const StyledSharedUiCarousel = styled.div`
         width: calc(100% / 6);
     }
 
-    .slider .listItem:first-child {
+    .slider .listItem:first-child,
+    .slider .listItemImg:first-child {
         margin-left: 0;
     }
 
@@ -61,8 +63,11 @@ export const StyledSharedUiCarousel = styled.div`
         width: calc(100% / 6);
     }
 
-    .slider .listItemImg:first-child {
-        margin-left: 0;
+    .slider .listItem,
+    .slider .listItemImg {
+        :hover {
+            transform: scale(1.1);
+        }
     }
 
     .sliderArrow {

@@ -1,11 +1,11 @@
 import { StyledHome } from "./home.styles"
 import { Carousel } from "../carousel/carousel"
 
-/* eslint-disable-next-line */
-export interface HomeProps {}
-const titles = ["Books", "Notes"]
+interface HomeProps {
+    titles: Array<string>
+}
 
-export function Home() {
+export function Home({ titles }: HomeProps) {
     return (
         <StyledHome>
             {titles.map((title, index) => (

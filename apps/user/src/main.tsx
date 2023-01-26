@@ -12,8 +12,12 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html,body {
+    height: 100%;
+  }
+
   #root {
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
   }

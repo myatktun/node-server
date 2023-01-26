@@ -4,7 +4,6 @@ export const StyledSharedUiFooter = styled.div`
     color: #ebdbb2;
     background-color: #282828;
     height: 100%;
-    width: 100%;
     display: flex;
     justify-content: space-around;
     padding: 30px;

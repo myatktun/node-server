@@ -16,5 +16,11 @@ export const StyledPage = styled.div`
 
     .slider .sliderArrow {
         color: #d79921;
+        cursor: pointer;
+        margin: 10px;
+    }
+
+    .slider .sliderArrow:hover {
+        transform: scale(1.2);
     }
 `

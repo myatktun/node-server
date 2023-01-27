@@ -11,6 +11,7 @@ interface SharedUiCarouselProps {
 }
 
 interface Item {
+    _id?: string
     name: string
 }
 
@@ -24,6 +25,27 @@ export const Carousel = ({ title, index, data }: SharedUiCarouselProps) => {
         } else {
             sliderRef.current.scrollLeft -= sliderRef.current.offsetWidth
         }
+    }
+
+    if (!data) {
+        return (
+            <StyledSharedUiCarousel style={{ backgroundColor: even ? "#282828" : "#1d2021" }}>
+                <Link to={`${title}`} className="title">
+                    {title}
+                </Link>
+                <div className="carousel">
+                    <ArrowBackIosOutlined
+                        className="sliderArrow left"
+                        onClick={() => moveSlider("left")}
+                    />
+                    <div className="wrapper">"Error"</div>
+                    <ArrowForwardIosOutlined
+                        className="sliderArrow right"
+                        onClick={() => moveSlider("right")}
+                    />
+                </div>
+            </StyledSharedUiCarousel>
+        )
     }
 
     return (

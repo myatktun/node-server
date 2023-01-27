@@ -5,9 +5,13 @@ import { StyledMenuBar } from "./menu-bar.styles"
 /* eslint-disable-next-line */
 export interface MenuBarProps {}
 
-export function MenuBar() {
+export const MenuBar = () => {
     const [isOpen, setOpen] = useState(false)
     const menuRef = useRef<HTMLLIElement>(null)
+
+    const closeDropDown = () => {
+        setOpen(false)
+    }
 
     useEffect(() => {
         const handler = (e: MouseEvent) => {
@@ -20,11 +24,14 @@ export function MenuBar() {
         return () => {
             document.removeEventListener("mousedown", handler)
         }
-    }, [])
+    }, [isOpen])
 
     return (
         <StyledMenuBar>
             <ul>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
                 <li>
                     <Link to="/books">Books</Link>
                 </li>
@@ -33,30 +40,35 @@ export function MenuBar() {
                 </li>
                 <li ref={menuRef}>
                     <p onClick={() => setOpen(!isOpen)}>Browse</p>
-                    {isOpen && <MenuDropDown />}
+                    {isOpen && <MenuDropDown closeDropDown={closeDropDown} />}
                 </li>
             </ul>
         </StyledMenuBar>
     )
 }
 
-const MenuDropDown = () => {
+interface MenuDropDownProps {
+    closeDropDown: () => void
+}
+
+const MenuDropDown = ({ closeDropDown }: MenuDropDownProps) => {
     return (
         <div className="menu-dropdown-content" id="menu-dropdown-content">
-            <MenuDropDownItem name="Authors" />
-            <MenuDropDownItem name="Categories" />
+            <MenuDropDownItem name="Authors" closeDropDown={closeDropDown} />
+            <MenuDropDownItem name="Categories" closeDropDown={closeDropDown} />
         </div>
     )
 }
 
 interface MenuDropDownItemProps {
     name: string
+    closeDropDown: () => void
 }
 
-const MenuDropDownItem = (props: MenuDropDownItemProps) => {
+const MenuDropDownItem = ({ name, closeDropDown }: MenuDropDownItemProps) => {
     return (
-        <Link to="/books" className="menu-dropdown-item">
-            {props.name}
+        <Link to={`/${name}`} className="menu-dropdown-item" onClick={() => closeDropDown()}>
+            {name}
         </Link>
     )
 }

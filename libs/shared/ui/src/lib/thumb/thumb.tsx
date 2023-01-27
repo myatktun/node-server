@@ -3,23 +3,23 @@ interface ThumbProps {
     item: { name: string; author?: string; olid?: string }
 }
 
-const Thumb = (props: ThumbProps) => {
-    if (props.title.toLowerCase() === "books") {
-        return props.item.olid ? (
+const Thumb = ({ title, item }: ThumbProps) => {
+    if (title.toLowerCase() === "books") {
+        return item.olid !== "unknown" ? (
             <img
-                src={`https://covers.openlibrary.org/b/olid/${props.item.olid}-M.jpg`}
-                alt=""
+                src={`https://covers.openlibrary.org/b/olid/${item.olid}-M.jpg`}
+                alt={`${item.name}`}
                 className="listItemImg"
             />
         ) : (
             <div className="listItem">
-                {props.item.name}
+                {item.name}
                 {"\nAuthor: "}
-                {props.item.author}
+                {item.author}
             </div>
         )
     }
 
-    return <div className="listItem">{props.item.name}</div>
+    return <div className="listItem">{item.name}</div>
 }
 export default Thumb

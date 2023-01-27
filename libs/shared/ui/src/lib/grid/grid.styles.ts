@@ -19,18 +19,17 @@ export const StyledGrid = styled.div`
         white-space: pre-wrap;
         background-color: #757575;
         vertical-align: top;
-        padding: 10px;
         height: 200px;
         width: 150px;
-    }
-
-    .listItem,
-    .listItemImg {
         max-height: 200px;
         max-width: 150px;
         border-radius: 20px;
         cursor: pointer;
         transition: all 0.3s;
+
+        img {
+            border-radius: 20px;
+        }
 
         :hover {
             opacity: 0.8;

@@ -2,17 +2,17 @@ import { useQuery } from "react-query"
 import { StyledDetail } from "./detail.styles"
 import Thumb from "../thumb/thumb"
 import { Carousel } from "../carousel/carousel"
+import { useParams } from "react-router-dom"
 
-/* eslint-disable-next-line */
-export interface DetailProps {}
+export const Detail = () => {
+    const { id } = useParams()
 
-export function Detail() {
     const fetchData = async () => {
-        const res = await fetch(`${process.env.NX_API_URL}/books/63b3c714e88774e6df7b2a63`)
+        const res = await fetch(`${process.env.NX_API_URL}/books/${id}`)
         return res.json()
     }
 
-    const { isLoading, error, data } = useQuery([`63b3c714e88774e6df7b2a63`], fetchData)
+    const { isLoading, error, data } = useQuery([`${id}`], fetchData)
 
     if (isLoading) return <StyledDetail>"Loading..."</StyledDetail>
     if (error) return <StyledDetail>"Error..."</StyledDetail>
@@ -30,6 +30,7 @@ export function Detail() {
 
 interface InfoProps {
     data: {
+        _id: string
         name: string
         author: string
         category: string

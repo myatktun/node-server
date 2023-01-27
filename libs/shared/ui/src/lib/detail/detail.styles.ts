@@ -13,7 +13,7 @@ export const StyledDetail = styled.div`
         height: 100%;
     }
 
-    img {
+    .detail img {
         border-radius: 1.5rem;
     }
 

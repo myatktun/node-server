@@ -1,3 +1,4 @@
+export * from "./lib/detail/detail"
 export * from "./lib/header/header"
 export * from "./lib/home/home"
 export * from "./lib/page/page"

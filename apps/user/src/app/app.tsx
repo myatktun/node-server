@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "react-query"
 import { Route, Routes } from "react-router-dom"
-import { Header, Home, Page, Footer } from "@projectx/shared/ui"
+import { Header, Home, Page, Detail, Footer } from "@projectx/shared/ui"
 
 const queryClient = new QueryClient()
 
@@ -22,6 +22,7 @@ export function App() {
                     path="/categories"
                     element={<Page title={"categories"} key="categories" />}
                 />
+                <Route path="/:id" element={<Detail />} />
             </Routes>
             <Footer />
         </QueryClientProvider>

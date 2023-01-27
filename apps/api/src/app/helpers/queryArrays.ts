@@ -55,7 +55,7 @@ const similarBooksQuery = async (): Promise<PipelineStage.Lookup> => {
                     $match: {
                         $expr: {
                             $and: [
-                                { $ne: ["$$book", "$book"] },
+                                { $ne: ["$$book", "$name"] },
                                 { $eq: ["$$category", "$category"] },
                             ],
                         },
@@ -137,10 +137,7 @@ const Books = async (
     return queryArray
 }
 
-const Authors = async (
-    mainQueryArray: PipelineStage[],
-    author = ""
-): Promise<PipelineStage[]> => {
+const Authors = async (mainQueryArray: PipelineStage[], author = ""): Promise<PipelineStage[]> => {
     const queryArray = mainQueryArray
     queryArray.unshift(
         {

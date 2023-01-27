@@ -32,7 +32,7 @@ export const StyledSharedUiCarousel = styled.div`
 
     .wrapper .slider {
         cursor: pointer;
-        height: 200px;
+        height: 260px;
         overflow: hidden;
         white-space: nowrap;
         scroll-behavior: smooth;
@@ -76,14 +76,6 @@ export const StyledSharedUiCarousel = styled.div`
         color: #ebdbb2;
     }
 
-    .sliderArrow.left {
-        left: 0;
-    }
-
-    .sliderArrow.right {
-        right: 0;
-    }
-
     .sliderArrow:hover,
     .sliderArrow:focus {
         transform: scale(1.5);
@@ -93,6 +85,12 @@ export const StyledSharedUiCarousel = styled.div`
     @media screen and (max-width: 1400px) {
         .title {
             margin-left: 10px;
+        }
+    }
+
+    @media screen and (max-width: 1100px) {
+        .wrapper .slider {
+            height: 200px;
         }
     }
 
@@ -107,12 +105,20 @@ export const StyledSharedUiCarousel = styled.div`
     }
 
     @media screen and (max-width: 500px) {
-        .slider .listItem {
-            width: calc(100% / 2);
+        .wrapper {
+            margin: 10px 5px;
         }
 
+        .slider .listItem,
         .slider .listItemImg {
             width: calc(100% / 2);
+        }
+    }
+
+    @media screen and (max-width: 350px) {
+        .slider .listItem,
+        .slider .listItemImg {
+            width: 100%;
         }
     }
 `

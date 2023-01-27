@@ -22,7 +22,7 @@ export function App() {
                     path="/categories"
                     element={<Page title={"categories"} key="categories" />}
                 />
-                <Route path="/:id" element={<Detail />} />
+                <Route path="/books/:id" element={<Detail />} />
             </Routes>
             <Footer />
         </QueryClientProvider>

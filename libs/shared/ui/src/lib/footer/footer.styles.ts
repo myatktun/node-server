@@ -17,16 +17,25 @@ export const StyledSharedUiFooter = styled.div`
         margin-top: 15px;
     }
 
-    .body li {
+    .body li,
+    a {
         list-style: none;
         margin: 0.5rem 0.2rem;
         font-size: 1rem;
         cursor: pointer;
+        color: #ebdbb2;
+        text-decoration: none;
     }
 
     .body .topic:hover,
-    li:hover {
+    li:hover,
+    a:hover {
         color: #458588;
+
+        li,
+        a {
+            color: #458588;
+        }
     }
 
     .body .topic {

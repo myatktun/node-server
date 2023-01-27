@@ -3,18 +3,18 @@ import Thumb from "../thumb/thumb"
 
 export interface GridProps {
     title: string
-    data: Array<any>
+    data: { results: Array<{ name: string }> }
 }
 
 interface Item {
     name: string
 }
 
-export function Grid(props: GridProps) {
+export function Grid({ title, data }: GridProps) {
     return (
         <StyledGrid>
-            {props.data.results.map((item: Item) => (
-                <Thumb key={item.name} title={props.title} item={item} />
+            {data.results.map((item: Item) => (
+                <Thumb key={item.name} title={title} item={item} />
             ))}
         </StyledGrid>
     )

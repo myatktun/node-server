@@ -39,30 +39,12 @@ export const StyledSharedUiCarousel = styled.div`
     }
 
     .slider .listItem {
-        box-sizing: border-box;
-        display: inline-block;
-        text-align: center;
-        white-space: pre-wrap;
-        background-color: #757575;
-        vertical-align: top;
-        height: 100%;
         margin-left: 2rem;
         width: calc(100% / 6);
     }
 
     .slider .listItem:first-child {
         margin-left: 0;
-    }
-
-    .slider .listItemImg {
-        height: 100%;
-        width: 100%;
-    }
-
-    .slider .listItem {
-        :hover {
-            transform: scale(1.1);
-        }
     }
 
     .sliderArrow {

@@ -8,33 +8,9 @@ export const StyledGrid = styled.div`
     justify-items: center;
     align-items: center;
 
-    .listItemImg {
-        width: 100%;
-        height: 100%;
-        object-fit: fill;
-    }
-
     .listItem {
-        text-align: center;
-        white-space: pre-wrap;
-        background-color: #757575;
-        vertical-align: top;
-        height: 200px;
-        width: 150px;
-        max-height: 200px;
-        max-width: 150px;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: all 0.3s;
-
-        img {
-            border-radius: 20px;
-        }
-
-        :hover {
-            opacity: 0.8;
-            transform: scale(1.1);
-        }
+        height: 280px;
+        width: 180px;
     }
 
     @media screen and (max-width: 720px) {

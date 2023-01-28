@@ -10,6 +10,7 @@ export const StyledDetail = styled.div`
         display: flex;
         padding: 3rem;
         align-items: center;
+        justify-content: space-around;
         height: 100%;
     }
 
@@ -28,7 +29,22 @@ export const StyledDetail = styled.div`
     }
 
     .info {
-        margin-left: 20%;
+        width: 50%;
+        font-size: 2rem;
         height: 100%;
+    }
+
+    .info a {
+        text-decoration: none;
+        color: inherit;
+
+        :hover {
+            color: #458588;
+        }
+    }
+
+    .detail .listItem {
+        height: 350px;
+        width: 250px;
     }
 `

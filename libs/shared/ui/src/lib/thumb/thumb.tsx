@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { StyledSharedUiThumb, Image, Wrapper, Text } from "./thumb.styles"
 
 interface ThumbProps {
     title: string
@@ -7,31 +8,46 @@ interface ThumbProps {
 
 const Thumb = ({ title, item }: ThumbProps) => {
     if (title.toLowerCase().includes("books")) {
-        return item.olid ? (
-            <div className="listItem">
-                <Link to={`/books/${item._id}`}>
-                    <img
-                        src={`https://covers.openlibrary.org/b/olid/${item.olid}-M.jpg`}
-                        alt={`${item.name}`}
-                        className="listItemImg"
-                    />
+        return (
+            <StyledSharedUiThumb className="listItem">
+                <Link to={`/books/${item._id}`} style={{ textDecoration: "none" }}>
+                    {item.olid !== "unknown" ? (
+                        <Image
+                            src={`https://covers.openlibrary.org/b/olid/${item.olid}-M.jpg`}
+                            alt={`${item.name}`}
+                        />
+                    ) : (
+                        <DefaultThumb title={item.name} author={item.author} />
+                    )}
                 </Link>
-            </div>
-        ) : (
-            <div className="listItem">
-                <Link to={`/books/${item._id}`}>
-                    {item.name}
-                    {"\nAuthor: "}
-                    {item.author}
-                </Link>
-            </div>
+            </StyledSharedUiThumb>
         )
     }
 
     return (
-        <div className="listItem">
-            <Link to={`/books/${item._id}`}>{item.name}</Link>
-        </div>
+        <StyledSharedUiThumb className="listItem">
+            <Link to={`/notes/${item._id}`}>
+                <DefaultThumb title={item.name} />
+            </Link>
+        </StyledSharedUiThumb>
     )
 }
+
+const DefaultThumb = ({ title, author }: DefaultThumbProps) => {
+    return (
+        <Wrapper>
+            <Text>
+                <p>{title}</p>
+                {"\n"}
+                <p>{author}</p>
+            </Text>
+        </Wrapper>
+    )
+}
+
+interface DefaultThumbProps {
+    title: string
+    author?: string
+}
+
 export default Thumb

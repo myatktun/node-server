@@ -1,9 +1,7 @@
 import { useQuery } from "react-query"
-import { StyledDetail } from "./detail.styles"
-import Thumb from "../thumb/thumb"
-import { Carousel } from "../carousel/carousel"
 import { useParams } from "react-router-dom"
-import { Book } from "@projectx/api-interfaces"
+import { StyledDetail } from "./detail.styles"
+import Book from "./book/book"
 
 export const Detail = () => {
     const { title, id } = useParams()
@@ -20,48 +18,12 @@ export const Detail = () => {
 
     return title === "books" ? (
         <StyledDetail>
-            <Info data={data.results[0]} title={title} />
-            <Carousel index={0} title={"Similar Books"} data={data.results[0].similar} />
-            {data.results[0].relatedNotes.length !== 0 && (
-                <Carousel index={1} title={"Related Notes"} data={data.results[0].relatedNotes} />
-            )}
+            <Book data={data} title={title} />
         </StyledDetail>
     ) : (
         <StyledDetail>
-            <Info data={data.results[0]} title={title} />
+            <h1>Not Books</h1>
         </StyledDetail>
-    )
-}
-
-interface InfoProps {
-    data: Book
-    title?: string
-}
-
-const Info = ({ data, title }: InfoProps) => {
-    return (
-        <div className="detail">
-            <Thumb title={`${title}`} item={data} />
-            <div className="info">
-                {data.olid !== "unknown" ? (
-                    <a
-                        href={`https://openlibrary.org/books/${data.olid}`}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <li className="title">{data.name}</li>
-                    </a>
-                ) : (
-                    <li className="title">{data.name}</li>
-                )}
-                <li>{data.author}</li>
-                <li>{data.category}</li>
-                <li>
-                    {"Status: "}
-                    {data.read}
-                </li>
-            </div>
-        </div>
     )
 }
 

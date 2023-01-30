@@ -23,7 +23,8 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@projectx/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+            "@projectx/shared/interface": ["libs/shared/interface/src/index.ts"],
+            "@projectx/shared/models": ["libs/shared/models/src/index.ts"],
             "@projectx/shared/ui": ["libs/shared/ui/src/index.ts"]
         }
     },

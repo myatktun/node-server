@@ -1,13 +1,9 @@
 import { getData } from "../helpers/helpers"
 import { Request, Response } from "express"
 
-export const getBooks = async (
-    req: Request,
-    res: Response
-): Promise<Response> => {
+export const getBooks = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const { totalResults, totalPages, page, limit, data, latest } =
-            await getData(req)
+        const { totalResults, totalPages, page, limit, data } = await getData(req)
 
         if (data.length) {
             return res.status(200).send({
@@ -17,7 +13,6 @@ export const getBooks = async (
                 limit_per_page: limit,
                 results_in_page: data.length,
                 results: data,
-                latest: latest,
             })
         }
         return res.status(404).send({

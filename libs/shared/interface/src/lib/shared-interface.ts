@@ -19,6 +19,7 @@ export interface Note {
     _id: string
     name: string
     category: string
+    dateAdded: string
 }
 
 export interface Data {

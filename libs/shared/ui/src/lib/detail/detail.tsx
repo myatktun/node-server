@@ -21,9 +21,7 @@ export const Detail = () => {
             <Book data={data} title={title} />
         </StyledDetail>
     ) : (
-        <StyledDetail>
-            <h1>Not Books</h1>
-        </StyledDetail>
+        <StyledDetail dangerouslySetInnerHTML={{ __html: data.results }}></StyledDetail>
     )
 }
 

@@ -1,10 +1,10 @@
 import styled from "styled-components"
 import Thumb from "../../thumb/thumb"
-import { Book as IBook } from "@projectx/api-interfaces"
+import { Book as IBook, BookResponse } from "@projectx/shared/interface"
 import { Carousel } from "../../carousel/carousel"
 
 interface BookProps {
-    data: {}
+    data: BookResponse
     title: string
 }
 
@@ -50,7 +50,7 @@ const Info = ({ data, title }: InfoProps) => {
                 <li>{data.category}</li>
                 <li>
                     {"Status: "}
-                    {data.read}
+                    {data.status}
                 </li>
             </div>
         </div>

@@ -35,9 +35,7 @@ const createQueryArray = async (
         }
         mainQueryArray.unshift({
             $sort: {
-                [`${query.sort}`]: query.sortOrder
-                    ? sortOrder.descending
-                    : sortOrder.ascending,
+                [`${query.sort}`]: query.sortOrder ? sortOrder.descending : sortOrder.ascending,
             },
         })
     }
@@ -49,15 +47,9 @@ const createQueryArray = async (
             Object.keys(params).length
         )
     } else if (route.path.includes("/authors")) {
-        return await Authors(
-            mainQueryArray,
-            <string>query.search || params.author
-        )
+        return await Authors(mainQueryArray, <string>query.search || params.author)
     } else if (route.path.includes("/categories")) {
-        return await Categories(
-            mainQueryArray,
-            <string>query.search || params.category
-        )
+        return await Categories(mainQueryArray, <string>query.search || params.category)
     }
     return await Notes(
         mainQueryArray,

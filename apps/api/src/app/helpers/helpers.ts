@@ -1,9 +1,9 @@
 import createQueryArray from "./createQueryArray"
-import Books from "../models/Book"
-import Notes from "../models/Note"
+import { Books } from "../models/Book"
+import { Notes } from "../models/Note"
 import { Request } from "express"
 import { PipelineStage } from "mongoose"
-import { QueryDB, Data } from "@projectx/api-interfaces"
+import { QueryDB, Data } from "@projectx/shared/interface"
 
 const calcMisc = async (query: {
     page: number
@@ -44,8 +44,8 @@ const queryDB = async (req: Request): Promise<QueryDB> => {
 
 export const getData = async (req: Request): Promise<Data> => {
     const { result, page, limit } = await queryDB(req)
-    const { total, data, latest } = result[0]
+    const { total, data } = result[0]
     const totalResults = total[0] ? total[0].total : 0
     const totalPages = Math.ceil(totalResults / limit)
-    return { totalResults, totalPages, page, limit, data, latest }
+    return { totalResults, totalPages, page, limit, data }
 }

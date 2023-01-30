@@ -1,14 +1,23 @@
-import Books from "../models/Book"
-import { Book } from "@projectx/shared/interface"
+import { Books } from "../models/Book"
+import { Notes } from "../models/Note"
+import { Book, Note } from "@projectx/shared/interface"
 
-export const addData = async (books: Array<Book>): Promise<void | Error> => {
+export const addData = async (title: string, data: Book[] | Note[]): Promise<void | Error> => {
     try {
-        for await (const book of books) {
-            await Books.findOneAndUpdate({ name: book.name }, book, {
-                upsert: true,
-                new: true,
-                runValidators: true,
-            })
+        for await (const item of data) {
+            if (title === "books") {
+                await Books.findOneAndUpdate({ name: item.name }, item, {
+                    upsert: true,
+                    new: true,
+                    runValidators: true,
+                })
+            } else {
+                await Notes.findOneAndUpdate({ name: item.name }, item, {
+                    upsert: true,
+                    new: true,
+                    runValidators: true,
+                })
+            }
         }
     } catch (error) {
         console.log(error)

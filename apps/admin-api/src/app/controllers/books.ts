@@ -13,7 +13,7 @@ export const getBooks = createProxyMiddleware({
 
 export const addBooks = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const success = await addData(req.body)
+        const success = await addData("books", req.body)
         if (!success) {
             return res.status(201).send({ msg: "Books added" })
         }

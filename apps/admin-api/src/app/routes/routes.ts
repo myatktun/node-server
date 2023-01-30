@@ -2,7 +2,7 @@ import express from "express"
 
 import { login, signup } from "../controllers/user"
 import { addBooks, getBooks } from "../controllers/books"
-import { getNotes } from "../controllers/notes"
+import { addNotes, getNotes } from "../controllers/notes"
 
 import auth from "../middleware/auth"
 
@@ -15,7 +15,7 @@ router.route("/authors/:author").get(getBooks)
 router.route("/categories").get(getBooks)
 router.route("/categories/:category").get(getBooks)
 
-router.route("/notes").get(getNotes)
+router.route("/notes").get(getNotes).post(auth, addNotes)
 router.route("/notes/:note").get(getNotes)
 
 router.route("/login").post(login)

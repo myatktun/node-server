@@ -19,11 +19,7 @@ const checkToken = async (
     }
 }
 
-const auth = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-): Promise<void | Response> => {
+const auth = async (req: Request, res: Response, next: NextFunction): Promise<void | Response> => {
     const authHeader = req.headers.authorization
 
     if (!authHeader || !authHeader.toLowerCase().startsWith("bearer")) {

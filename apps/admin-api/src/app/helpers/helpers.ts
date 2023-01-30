@@ -1,5 +1,5 @@
 import Books from "../models/Book"
-import { Book } from "@projectx/api-interfaces"
+import { Book } from "@projectx/shared/interface"
 
 export const addData = async (books: Array<Book>): Promise<void | Error> => {
     try {

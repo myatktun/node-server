@@ -19,24 +19,17 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         return res.status(404).send({ msg: "Invalid credentials" })
     }
 
-    return res
-        .status(200)
-        .send({ name: user.name, token: await user.createJWT() })
+    return res.status(200).send({ name: user.name, token: await user.createJWT() })
 }
 
-export const signup = async (
-    req: Request,
-    res: Response
-): Promise<Response> => {
+export const signup = async (req: Request, res: Response): Promise<Response> => {
     const { name, password, secret } = req.body
     if (!name || !password || !secret) {
         return res.status(404).send({ msg: "Not enough info to create User" })
     }
 
     if (secret !== process.env.SECRET_KEY) {
-        return res
-            .status(404)
-            .send({ msg: "Invalid secret key to create user" })
+        return res.status(404).send({ msg: "Invalid secret key to create user" })
     }
 
     if (await User.findOne({ name })) {

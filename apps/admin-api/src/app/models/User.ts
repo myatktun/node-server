@@ -1,9 +1,9 @@
 import { Schema, model } from "mongoose"
 import jwt from "jsonwebtoken"
 import { randomBytes, scryptSync } from "crypto"
-import { IUser } from "@projectx/api-interfaces"
+import { User } from "@projectx/shared/interface"
 
-const UserSchema = new Schema<IUser>(
+const UserSchema = new Schema<User>(
     {
         name: {
             type: String,
@@ -20,9 +20,7 @@ const UserSchema = new Schema<IUser>(
 
 UserSchema.pre("save", async function () {
     this.salt = randomBytes(16).toString("base64")
-    this.password = scryptSync(this.password as string, this.salt, 64).toString(
-        "base64"
-    )
+    this.password = scryptSync(this.password as string, this.salt, 64).toString("base64")
 })
 
 UserSchema.methods.createJWT = async function (): Promise<string> {
@@ -35,9 +33,7 @@ UserSchema.methods.createJWT = async function (): Promise<string> {
     })
 }
 
-UserSchema.methods.validPassword = async function (
-    password: string
-): Promise<boolean> {
+UserSchema.methods.validPassword = async function (password: string): Promise<boolean> {
     const correct = scryptSync(password, this.salt, 64).toString("base64")
     return correct === this.password
 }

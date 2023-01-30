@@ -11,10 +11,7 @@ export const getBooks = createProxyMiddleware({
     changeOrigin: true,
 })
 
-export const addBooks = async (
-    req: Request,
-    res: Response
-): Promise<Response> => {
+export const addBooks = async (req: Request, res: Response): Promise<Response> => {
     try {
         const success = await addData(req.body)
         if (!success) {

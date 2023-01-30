@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { Book } from "@projectx/api-interfaces"
+import { Book } from "@projectx/shared/interface"
 
 const BookSchema = new mongoose.Schema<Book>(
     {
@@ -16,7 +16,7 @@ const BookSchema = new mongoose.Schema<Book>(
             type: String,
             default: "unknown",
         },
-        read: {
+        status: {
             type: String,
             enum: {
                 values: ["new", "reading", "finished"],

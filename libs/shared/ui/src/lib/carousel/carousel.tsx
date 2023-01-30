@@ -2,12 +2,13 @@ import { Link } from "react-router-dom"
 import { useRef } from "react"
 import { StyledSharedUiCarousel } from "./carousel.styles"
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from "@mui/icons-material"
+import { Book, Note } from "@projectx/shared/interface"
 import Thumb from "../thumb/thumb"
 
 interface SharedUiCarouselProps {
     title: string
     index: number
-    data: [{ name: string }]
+    data: Book[] | Note[]
 }
 
 interface Item {

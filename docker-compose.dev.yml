@@ -15,7 +15,7 @@ services:
       - ./libs:/usr/src/app/libs:z
     env_file:
       - ./apps/user/.env.docker
-    restart: "no"
+    restart: "on-failure"
 
   api:
     image: api:latest
@@ -33,7 +33,7 @@ services:
       - db
     env_file:
       - ./apps/api/.env.docker
-    restart: "no"
+    restart: "on-failure"
 
   admin-api:
     image: admin-api:latest
@@ -51,7 +51,43 @@ services:
       - db
     env_file:
       - ./apps/admin-api/.env.docker
-    restart: "no"
+    restart: "on-failure"
+
+  converter-api:
+    image: converter-api:latest
+    build:
+      context: .
+      dockerfile: ./apps/converter-api/Dockerfile.dev
+    container_name: converter-api
+    ports:
+      - "5003:80"
+    volumes:
+      - ./node_modules:/usr/src/app/node_modules
+      - ./apps/converter-api:/usr/src/app/apps/converter-api:z
+      - ./libs:/usr/src/app/libs:z
+    depends_on:
+      - db
+    env_file:
+      - ./apps/converter-api/.env.docker
+    restart: "on-failure"
+
+  storage:
+    image: aws-storage:latest
+    build:
+      context: .
+      dockerfile: ./apps/aws-storage/Dockerfile.dev
+    container_name: storage
+    ports:
+      - "5004:80"
+    volumes:
+      - ./node_modules:/usr/src/app/node_modules
+      - ./apps/aws-storage:/usr/src/app/apps/aws-storage:z
+      - ./libs:/usr/src/app/libs:z
+    depends_on:
+      - db
+    env_file:
+      - ./apps/aws-storage/.env.docker
+    restart: "on-failure"
 
   db:
     image: mongo:latest

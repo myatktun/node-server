@@ -1,22 +1,12 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "allowJs": true,
-        "typeRoots": [
-            "./types",
-            "./node_modules/@types"
-        ],
         "outDir": "../../dist/out-tsc",
         "module": "commonjs",
-        "removeComments": true,
-        "noEmitOnError": true,
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noImplicitReturns": true,
-        "skipLibCheck": true,
+        "types": [
+            "node",
+            "express"
+        ]
     },
     "exclude": [
         "jest.config.ts",

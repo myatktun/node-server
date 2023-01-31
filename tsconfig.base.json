@@ -10,21 +10,23 @@
         "importHelpers": true,
         "target": "es2015",
         "module": "esnext",
-        "lib": [
-            "es2017",
-            "dom"
-        ],
+        "lib": ["es2017", "dom"],
+        "removeComments": true,
+        "noEmitOnError": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
         "skipLibCheck": true,
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@projectx/api-interfaces": [
-                "libs/api-interfaces/src/index.ts"
-            ]
+            "@projectx/shared/interface": ["libs/shared/interface/src/index.ts"],
+            "@projectx/shared/models": ["libs/shared/models/src/index.ts"],
+            "@projectx/shared/ui": ["libs/shared/ui/src/index.ts"]
         }
     },
-    "exclude": [
-        "node_modules",
-        "tmp"
-    ]
+    "exclude": ["node_modules", "tmp"]
 }

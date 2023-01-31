@@ -1,6 +1,2 @@
-/src/api/db/*
-!/src/api/db/connect.js
-!/src/api/db/bookData.json
-
 *.dev.ts
 *.sh

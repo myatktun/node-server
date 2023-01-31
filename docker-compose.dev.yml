@@ -1,0 +1,106 @@
+version: "3.9"
+
+services:
+  user:
+    image: user:latest
+    build:
+      context: .
+      dockerfile: ./apps/user/Dockerfile.dev
+    container_name: user
+    ports:
+      - "5000:80"
+    volumes:
+      - ./node_modules:/usr/src/app/node_modules
+      - ./apps/user:/usr/src/app/apps/user:z
+      - ./libs:/usr/src/app/libs:z
+    env_file:
+      - ./apps/user/.env.docker
+    restart: "on-failure"
+
+  api:
+    image: api:latest
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile.dev
+    container_name: api
+    ports:
+      - "5001:80"
+    volumes:
+      - ./node_modules:/usr/src/app/node_modules
+      - ./apps/api:/usr/src/app/apps/api:z
+      - ./libs:/usr/src/app/libs:z
+    depends_on:
+      - db
+    env_file:
+      - ./apps/api/.env.docker
+    restart: "on-failure"
+
+  admin-api:
+    image: admin-api:latest
+    build:
+      context: .
+      dockerfile: ./apps/admin-api/Dockerfile.dev
+    container_name: admin-api
+    ports:
+      - "5002:80"
+    volumes:
+      - ./node_modules:/usr/src/app/node_modules
+      - ./apps/admin-api:/usr/src/app/apps/admin-api:z
+      - ./libs:/usr/src/app/libs:z
+    depends_on:
+      - db
+    env_file:
+      - ./apps/admin-api/.env.docker
+    restart: "on-failure"
+
+  converter-api:
+    image: converter-api:latest
+    build:
+      context: .
+      dockerfile: ./apps/converter-api/Dockerfile.dev
+    container_name: converter-api
+    ports:
+      - "5003:80"
+    volumes:
+      - ./node_modules:/usr/src/app/node_modules
+      - ./apps/converter-api:/usr/src/app/apps/converter-api:z
+      - ./libs:/usr/src/app/libs:z
+    depends_on:
+      - db
+    env_file:
+      - ./apps/converter-api/.env.docker
+    restart: "on-failure"
+
+  storage:
+    image: aws-storage:latest
+    build:
+      context: .
+      dockerfile: ./apps/aws-storage/Dockerfile.dev
+    container_name: storage
+    ports:
+      - "5004:80"
+    volumes:
+      - ./node_modules:/usr/src/app/node_modules
+      - ./apps/aws-storage:/usr/src/app/apps/aws-storage:z
+      - ./libs:/usr/src/app/libs:z
+    depends_on:
+      - db
+    env_file:
+      - ./apps/aws-storage/.env.docker
+    restart: "on-failure"
+
+  db:
+    image: mongo:latest
+    container_name: db
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+    volumes:
+      - ${MONGO_PATH}:/data/db
+    restart: "always"
+
+networks:
+  my_network:
+    external: true

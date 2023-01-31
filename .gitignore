@@ -43,3 +43,5 @@ Thumbs.db
 *.dev.ts
 *.sh
 
+# Generate docs
+html

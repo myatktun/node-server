@@ -1,75 +1,57 @@
-import { useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom"
-import { StyledMenuBar } from "./menu-bar.styles"
+import { useState } from "react"
+import { Link as RouterLink } from "react-router-dom"
+import Link from "@mui/material/Link"
+import Button from "@mui/material/Button"
+import Menu from "@mui/material/Menu"
+import MenuItem from "@mui/material/MenuItem"
 
-/* eslint-disable-next-line */
-export interface MenuBarProps {}
+interface MenuBarProps {
+    items: Array<string>
+}
 
-export const MenuBar = () => {
-    const [isOpen, setOpen] = useState(false)
-    const menuRef = useRef<HTMLLIElement>(null)
-
-    const closeDropDown = () => {
-        setOpen(false)
+const MenuBar = ({ items }: MenuBarProps) => {
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+    const open = Boolean(anchorEl)
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget)
     }
-
-    useEffect(() => {
-        const handler = (e: MouseEvent) => {
-            if (menuRef.current !== null && !menuRef.current.contains(e.target as Node)) {
-                setOpen(false)
-            }
-        }
-        document.addEventListener("mousedown", handler)
-
-        return () => {
-            document.removeEventListener("mousedown", handler)
-        }
-    }, [isOpen])
-
+    const handleClose = () => {
+        setAnchorEl(null)
+    }
     return (
-        <StyledMenuBar>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/books">Books</Link>
-                </li>
-                <li>
-                    <Link to="/notes">Notes</Link>
-                </li>
-                <li ref={menuRef}>
-                    <p onClick={() => setOpen(!isOpen)}>Browse</p>
-                    {isOpen && <MenuDropDown closeDropDown={closeDropDown} />}
-                </li>
-            </ul>
-        </StyledMenuBar>
-    )
-}
-
-interface MenuDropDownProps {
-    closeDropDown: () => void
-}
-
-const MenuDropDown = ({ closeDropDown }: MenuDropDownProps) => {
-    return (
-        <div className="menu-dropdown-content" id="menu-dropdown-content">
-            <MenuDropDownItem name="Authors" closeDropDown={closeDropDown} />
-            <MenuDropDownItem name="Categories" closeDropDown={closeDropDown} />
-        </div>
-    )
-}
-
-interface MenuDropDownItemProps {
-    name: string
-    closeDropDown: () => void
-}
-
-const MenuDropDownItem = ({ name, closeDropDown }: MenuDropDownItemProps) => {
-    return (
-        <Link to={`/${name}`} className="menu-dropdown-item" onClick={() => closeDropDown()}>
-            {name}
-        </Link>
+        <>
+            <Button
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+                color="inherit"
+            >
+                Browse
+            </Button>
+            <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                }}
+            >
+                {items.map((item) => (
+                    <MenuItem color="inherit" onClick={handleClose}>
+                        <Link
+                            component={RouterLink}
+                            to={`/${item.toLowerCase()}`}
+                            underline="none"
+                            color="inherit"
+                        >
+                            {item}
+                        </Link>
+                    </MenuItem>
+                ))}
+            </Menu>
+        </>
     )
 }
 

@@ -5,6 +5,7 @@ export const StyledDetail = styled.div`
     color: #ebdbb2;
     display: flex;
     flex-direction: column;
+    padding-top: 64px;
 
     .detail {
         display: flex;

@@ -2,6 +2,8 @@ import { useQuery } from "react-query"
 import { useParams } from "react-router-dom"
 import { StyledDetail } from "./detail.styles"
 import Book from "./book/book"
+import Note from "./note/note"
+import CircularProgress from "@mui/material/CircularProgress"
 
 export const Detail = () => {
     const { title, id } = useParams()
@@ -13,7 +15,12 @@ export const Detail = () => {
 
     const { isLoading, error, data } = useQuery([`${id}`], fetchData)
 
-    if (isLoading) return <StyledDetail>"Loading..."</StyledDetail>
+    if (isLoading)
+        return (
+            <StyledDetail>
+                <CircularProgress />
+            </StyledDetail>
+        )
     if (error) return <StyledDetail>"Error..."</StyledDetail>
 
     return title === "books" ? (
@@ -21,7 +28,9 @@ export const Detail = () => {
             <Book data={data} title={title} />
         </StyledDetail>
     ) : (
-        <StyledDetail dangerouslySetInnerHTML={{ __html: data.results }}></StyledDetail>
+        <StyledDetail>
+            <Note data={data} />
+        </StyledDetail>
     )
 }
 

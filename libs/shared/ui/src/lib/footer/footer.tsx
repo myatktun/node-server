@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link as RouterLink } from "react-router-dom"
 import { StyledSharedUiFooter } from "./footer.styles"
 import EmailIcon from "@mui/icons-material/Email"
 import GitHubIcon from "@mui/icons-material/GitHub"
@@ -35,18 +35,18 @@ const Discover = () => {
             <span className="title">Discover</span>
             <div className="body">
                 <li>
-                    <Link to="/">Home</Link>
+                    <RouterLink to="/">Home</RouterLink>
                 </li>
                 <li>
-                    <Link to="/books">Books</Link>
+                    <RouterLink to="/books">Books</RouterLink>
                 </li>
                 <li>
-                    <Link to="/notes">Notes</Link>
+                    <RouterLink to="/notes">Notes</RouterLink>
                 </li>
                 <li>
-                    <Link to="#" onClick={() => window.scrollTo(0, 0)}>
+                    <RouterLink to="#" onClick={() => window.scrollTo(0, 0)}>
                         Return to top
-                    </Link>
+                    </RouterLink>
                 </li>
             </div>
         </div>

@@ -2,11 +2,12 @@ import styled from "styled-components"
 
 export const StyledSharedUiFooter = styled.div`
     color: #ebdbb2;
-    background-color: #282828;
+    background-color: #1d2021;
     height: 100%;
     display: flex;
     justify-content: space-around;
     padding: 30px;
+    margin-top: auto;
 
     .title {
         font-weight: 900;

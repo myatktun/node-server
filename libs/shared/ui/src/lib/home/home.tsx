@@ -1,6 +1,7 @@
 import { useQueries } from "react-query"
 import { StyledHome } from "./home.styles"
 import { Carousel } from "../carousel/carousel"
+import CircularProgress from "@mui/material/CircularProgress"
 
 interface HomeProps {
     titles: Array<string>
@@ -21,7 +22,12 @@ export function Home({ titles }: HomeProps) {
         })
     )
 
-    if (all.some((e) => e.isLoading)) return <div>"Loading..."</div>
+    if (all.some((e) => e.isLoading))
+        return (
+            <div>
+                <CircularProgress />
+            </div>
+        )
     if (all.some((e) => e.error)) return <div>"Error..."</div>
 
     return (

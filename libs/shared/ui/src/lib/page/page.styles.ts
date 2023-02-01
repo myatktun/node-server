@@ -6,6 +6,16 @@ export const StyledPage = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    flex: 1;
+    padding-top: 64px;
+
+    .title {
+        color: #ebdbb2;
+        font-weight: 900;
+        font-size: 30px;
+        margin-top: 20px;
+        margin-left: 50px;
+    }
 
     .slider {
         display: flex;

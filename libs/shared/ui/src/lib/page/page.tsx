@@ -3,6 +3,7 @@ import { StyledPage } from "./page.styles"
 import { Grid } from "../grid/grid"
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from "@mui/icons-material"
 import { useEffect, useState } from "react"
+import CircularProgress from "@mui/material/CircularProgress"
 
 interface PageProps {
     title: string
@@ -38,11 +39,17 @@ export const Page = ({ title }: PageProps) => {
         }
     }, [currentPage, currentData, data])
 
-    if (isLoading) return <StyledPage>"Loading..."</StyledPage>
+    if (isLoading)
+        return (
+            <StyledPage>
+                <CircularProgress />
+            </StyledPage>
+        )
     if (error) return <StyledPage>"Error..."</StyledPage>
 
     return (
         <StyledPage>
+            <div className="title">{title.toUpperCase()}</div>
             <Grid title={title} data={currentData} />
             <div className="slider">
                 <ArrowBackIosOutlined

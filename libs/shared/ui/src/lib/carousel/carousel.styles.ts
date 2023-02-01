@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const StyledSharedUiCarousel = styled.div`
     color: white;
-    padding: 20px;
+    padding: 40px 30px;
 
     .title {
         color: #ebdbb2;

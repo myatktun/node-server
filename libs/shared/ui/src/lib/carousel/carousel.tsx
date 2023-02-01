@@ -30,7 +30,7 @@ export const Carousel = ({ title, index, data }: SharedUiCarouselProps) => {
 
     if (!data) {
         return (
-            <StyledSharedUiCarousel style={{ backgroundColor: even ? "#282828" : "#1d2021" }}>
+            <StyledSharedUiCarousel style={{ backgroundColor: even ? "#282828" : "#3c3836" }}>
                 <Link to={`${title}`} className="title">
                     {title}
                 </Link>
@@ -50,7 +50,7 @@ export const Carousel = ({ title, index, data }: SharedUiCarouselProps) => {
     }
 
     return (
-        <StyledSharedUiCarousel style={{ backgroundColor: even ? "#282828" : "#1d2021" }}>
+        <StyledSharedUiCarousel style={{ backgroundColor: even ? "#282828" : "#3c3836" }}>
             <Link to={`${title}`} className="title">
                 {title}
             </Link>

@@ -12,15 +12,15 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  html,body {
-    height: 100%;
+  html {
     scroll-behavior: smooth;
   }
 
   #root {
-    height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #282828;
   }
 `
 

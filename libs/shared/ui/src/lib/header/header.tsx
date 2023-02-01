@@ -29,7 +29,7 @@ export const Header = () => {
     }, [tab, pathname])
 
     return (
-        <AppBar position="relative" sx={{ background: "#1d2021", color: "#ebdbb2" }}>
+        <AppBar position="fixed" sx={{ background: "#1d2021", color: "#ebdbb2" }}>
             <Toolbar>
                 <Tabs textColor="inherit" value={tab} indicatorColor="primary" onChange={changeTab}>
                     <Tab

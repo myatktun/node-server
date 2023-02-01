@@ -65,7 +65,4 @@ export const Text = styled.div`
     text-align: center;
     border-radius: 20px 20px 0 0;
     padding: 5px 10px 20px 10px;
-    @media screen and (max-width: 768px) {
-        font-size: 300px;
-    }
 `

@@ -4,6 +4,8 @@ import { Grid } from "../grid/grid"
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from "@mui/icons-material"
 import { useEffect, useState } from "react"
 import CircularProgress from "@mui/material/CircularProgress"
+import Alert from "@mui/material/Alert"
+import AlertTitle from "@mui/material/AlertTitle"
 
 interface PageProps {
     title: string
@@ -49,7 +51,16 @@ export const Page = ({ title }: PageProps) => {
         )
     }
 
-    if (error) return <StyledPage>"Error..."</StyledPage>
+    if (error) {
+        return (
+            <StyledPage>
+                <Alert severity="error">
+                    <AlertTitle>Error</AlertTitle>
+                    Sorry, something went wrong.
+                </Alert>
+            </StyledPage>
+        )
+    }
 
     return (
         <StyledPage>

@@ -9,6 +9,12 @@ export const StyledPage = styled.div`
     flex: 1;
     padding-top: 64px;
 
+    .loader {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
     .title {
         color: #ebdbb2;
         font-weight: 900;

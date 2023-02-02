@@ -39,12 +39,16 @@ export const Page = ({ title }: PageProps) => {
         }
     }, [currentPage, currentData, data])
 
-    if (isLoading)
+    if (isLoading) {
         return (
             <StyledPage>
-                <CircularProgress />
+                <div className="loader">
+                    <CircularProgress />
+                </div>
             </StyledPage>
         )
+    }
+
     if (error) return <StyledPage>"Error..."</StyledPage>
 
     return (

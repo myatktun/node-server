@@ -66,7 +66,7 @@
         "@storybook/core-server": "^6.5.15",
         "@storybook/manager-webpack5": "^6.5.15",
         "@storybook/react": "^6.5.15",
-        "@svgr/webpack": "^5.4.0",
+        "@svgr/webpack": "^6.1.2",
         "@testing-library/react": "13.4.0",
         "@types/cors": "^2.8.13",
         "@types/express": "^4.17.15",
@@ -110,6 +110,6 @@
         "ts-jest": "29.0.3",
         "ts-node": "10.9.1",
         "typescript": "^4.9.4",
-        "url-loader": "^3.0.0"
+        "url-loader": "^4.1.1"
     }
 }

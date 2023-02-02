@@ -2,7 +2,6 @@ import styled from "styled-components"
 
 export const StyledSharedUiHeader = styled.nav`
     background-color: #1d2021;
-    color: black;
     display: flex;
     justify-content: space-around;
     align-items: center;

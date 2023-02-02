@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { Link as RouterLink } from "react-router-dom"
-import Link from "@mui/material/Link"
 import Button from "@mui/material/Button"
 import Menu from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
@@ -37,17 +36,27 @@ const MenuBar = ({ items }: MenuBarProps) => {
                 MenuListProps={{
                     "aria-labelledby": "basic-button",
                 }}
+                PaperProps={{
+                    sx: {
+                        backgroundColor: "#1d2021",
+                    },
+                }}
             >
-                {items.map((item) => (
-                    <MenuItem color="inherit" onClick={handleClose}>
-                        <Link
-                            component={RouterLink}
-                            to={`/${item.toLowerCase()}`}
-                            underline="none"
-                            color="inherit"
-                        >
-                            {item}
-                        </Link>
+                {items.map((item, index) => (
+                    <MenuItem
+                        key={index}
+                        color="inherit"
+                        onClick={handleClose}
+                        sx={{
+                            color: "#ebdbb2",
+                            "&:hover": {
+                                backgroundColor: "rgba(40,40,40, 0.9)",
+                            },
+                        }}
+                        component={RouterLink}
+                        to={`/${item.toLowerCase()}`}
+                    >
+                        {item}
                     </MenuItem>
                 ))}
             </Menu>

@@ -15,12 +15,16 @@ export const Detail = () => {
 
     const { isLoading, error, data } = useQuery([`${id}`], fetchData)
 
-    if (isLoading)
+    if (isLoading) {
         return (
             <StyledDetail>
-                <CircularProgress />
+                <div className="loader">
+                    <CircularProgress />
+                </div>
             </StyledDetail>
         )
+    }
+
     if (error) return <StyledDetail>"Error..."</StyledDetail>
 
     return title === "books" ? (

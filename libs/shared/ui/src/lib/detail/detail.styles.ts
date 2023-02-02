@@ -6,4 +6,10 @@ export const StyledDetail = styled.div`
     display: flex;
     flex-direction: column;
     padding-top: 64px;
+
+    .loader {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
 `

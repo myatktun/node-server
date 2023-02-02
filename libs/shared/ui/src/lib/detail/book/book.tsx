@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import StyledBook from "./book.styles"
 import Thumb from "../../thumb/thumb"
 import { Book as IBook, BookResponse } from "@projectx/shared/interface"
 import { Carousel } from "../../carousel/carousel"
@@ -7,11 +7,6 @@ interface BookProps {
     data: BookResponse
     title: string
 }
-
-const StyledBook = styled.div`
-    display: flex;
-    flex-direction: column;
-`
 
 const Book = ({ data, title }: BookProps) => {
     return (
@@ -46,12 +41,11 @@ const Info = ({ data, title }: InfoProps) => {
                 ) : (
                     <li className="title">{data.name}</li>
                 )}
-                <li>{data.author}</li>
-                <li>{data.category}</li>
-                <li>
-                    {"Status: "}
-                    {data.status}
-                </li>
+                <ul>
+                    <li>Author: {data.author}</li>
+                    <li>Category: {data.category}</li>
+                    <li>Status: {data.status}</li>
+                </ul>
             </div>
         </div>
     )

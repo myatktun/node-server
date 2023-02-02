@@ -25,7 +25,8 @@ const StyledNote = styled.div`
 
     h1 {
         text-align: center;
-        font-size: 2.2rem;
+        font-size: 3rem;
+        padding-bottom: 5rem;
     }
 
     h2 {

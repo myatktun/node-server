@@ -4,6 +4,8 @@ import { StyledDetail } from "./detail.styles"
 import Book from "./book/book"
 import Note from "./note/note"
 import CircularProgress from "@mui/material/CircularProgress"
+import Alert from "@mui/material/Alert"
+import AlertTitle from "@mui/material/AlertTitle"
 
 export const Detail = () => {
     const { title, id } = useParams()
@@ -25,7 +27,16 @@ export const Detail = () => {
         )
     }
 
-    if (error) return <StyledDetail>"Error..."</StyledDetail>
+    if (error) {
+        return (
+            <StyledDetail>
+                <Alert severity="error">
+                    <AlertTitle>Error</AlertTitle>
+                    Sorry, something went wrong.
+                </Alert>
+            </StyledDetail>
+        )
+    }
 
     return title === "books" ? (
         <StyledDetail>

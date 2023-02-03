@@ -49,6 +49,10 @@ export interface BookResponse extends ApiResponse {
     results: SingleBook[]
 }
 
+export interface AuthorResponse extends ApiResponse {
+    results: Author[]
+}
+
 export interface Result {
     total: [{ total: number }]
     data: Book[] | Note[]

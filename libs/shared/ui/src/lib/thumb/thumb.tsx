@@ -26,7 +26,7 @@ const Thumb = ({ title, item }: ThumbProps) => {
 
     return (
         <StyledSharedUiThumb className="listItem">
-            <RouterLink to={`/notes/${item._id}`}>
+            <RouterLink to={`/${title.toLowerCase()}/${item._id}`}>
                 <DefaultThumb title={item.name} />
             </RouterLink>
         </StyledSharedUiThumb>

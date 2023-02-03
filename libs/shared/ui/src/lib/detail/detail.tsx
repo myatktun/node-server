@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { StyledDetail } from "./detail.styles"
 import Book from "./book/book"
 import Note from "./note/note"
+import Author from "./author/author"
 import CircularProgress from "@mui/material/CircularProgress"
 import Error from "../error/error"
 
@@ -34,15 +35,29 @@ export const Detail = () => {
         )
     }
 
-    return title === "books" ? (
-        <StyledDetail>
-            <Book data={data} title={title} />
-        </StyledDetail>
-    ) : (
-        <StyledDetail>
-            <Note data={data} />
-        </StyledDetail>
-    )
+    if (title === "books") {
+        return (
+            <StyledDetail>
+                <Book data={data} title={title} />
+            </StyledDetail>
+        )
+    }
+    if (title === "notes") {
+        return (
+            <StyledDetail>
+                <Note data={data} />
+            </StyledDetail>
+        )
+    }
+    if (title === "authors") {
+        return (
+            <StyledDetail>
+                <Author data={data} title={title} />
+            </StyledDetail>
+        )
+    }
+
+    return <StyledDetail>{data}</StyledDetail>
 }
 
 export default Detail

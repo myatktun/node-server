@@ -2,8 +2,7 @@ import { useQueries } from "react-query"
 import { StyledHome } from "./home.styles"
 import { Carousel } from "../carousel/carousel"
 import CircularProgress from "@mui/material/CircularProgress"
-import Alert from "@mui/material/Alert"
-import AlertTitle from "@mui/material/AlertTitle"
+import Error from "../error/error"
 
 interface HomeProps {
     titles: Array<string>
@@ -34,10 +33,7 @@ export function Home({ titles }: HomeProps) {
     if (all.some((e) => e.error)) {
         return (
             <StyledHome>
-                <Alert severity="error">
-                    <AlertTitle>Error</AlertTitle>
-                    Sorry, something went wrong.
-                </Alert>
+                <Error />
             </StyledHome>
         )
     }

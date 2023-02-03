@@ -13,7 +13,7 @@ import useMediaQuery from "@mui/material/useMediaQuery"
 import useTheme from "@mui/material/styles/useTheme"
 
 /* eslint-disable-next-line */
-export interface SharedUiHeaderProps {}
+export interface SharedUiHeaderProps { }
 
 export const Header = () => {
     const [tab, setTab] = useState(1)
@@ -27,8 +27,6 @@ export const Header = () => {
     useEffect(() => {
         if (pathname.includes("/books")) setTab(2)
         else if (pathname.includes("/notes")) setTab(3)
-        else if (pathname.includes("/authors")) setTab(4)
-        else if (pathname.includes("/categories")) setTab(5)
         else setTab(1)
     }, [tab, pathname])
 

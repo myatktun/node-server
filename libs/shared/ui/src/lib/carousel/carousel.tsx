@@ -4,6 +4,7 @@ import { StyledSharedUiCarousel } from "./carousel.styles"
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from "@mui/icons-material"
 import { Book, Note } from "@projectx/shared/interface"
 import Thumb from "../thumb/thumb"
+import Error from "../error/error"
 
 interface SharedUiCarouselProps {
     title: string
@@ -39,7 +40,9 @@ export const Carousel = ({ title, index, data }: SharedUiCarouselProps) => {
                         className="sliderArrow left"
                         onClick={() => moveSlider("left")}
                     />
-                    <div className="wrapper">"Error"</div>
+                    <div className="wrapper">
+                        <Error />
+                    </div>
                     <ArrowForwardIosOutlined
                         className="sliderArrow right"
                         onClick={() => moveSlider("right")}

@@ -9,7 +9,6 @@ export const getFromNotes = async (req: Request, res: Response): Promise<Respons
 
         if (data.length) {
             if (req.params.note) {
-                // console.log(await convertMarkdown(data[0]))
                 return res.status(200).send({
                     total: totalResults,
                     total_pages: totalPages,

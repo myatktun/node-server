@@ -139,6 +139,7 @@ const Books = async (
 
 const Authors = async (mainQueryArray: PipelineStage[], author = ""): Promise<PipelineStage[]> => {
     const queryArray = mainQueryArray
+
     queryArray.unshift(
         {
             $group: {
@@ -148,7 +149,7 @@ const Authors = async (mainQueryArray: PipelineStage[], author = ""): Promise<Pi
         },
         {
             $project: {
-                _id: new Types.ObjectId().valueOf(),
+                _id: 1,
                 name: "$_id",
                 books: "$books",
             },
@@ -157,7 +158,7 @@ const Authors = async (mainQueryArray: PipelineStage[], author = ""): Promise<Pi
             $match: {
                 $expr: {
                     $regexFind: {
-                        input: "$name",
+                        input: "$_id",
                         regex: author,
                         options: "i",
                     },
@@ -173,6 +174,7 @@ const Categories = async (
     category = ""
 ): Promise<PipelineStage[]> => {
     const queryArray = mainQueryArray
+
     queryArray.unshift(
         {
             $group: {
@@ -182,7 +184,7 @@ const Categories = async (
         },
         {
             $project: {
-                _id: new Types.ObjectId().valueOf(),
+                _id: 1,
                 name: "$_id",
                 books: "$books",
             },
@@ -191,7 +193,7 @@ const Categories = async (
             $match: {
                 $expr: {
                     $regexFind: {
-                        input: "$name",
+                        input: "_id",
                         regex: category,
                         options: "i",
                     },

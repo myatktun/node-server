@@ -148,7 +148,7 @@ const Authors = async (mainQueryArray: PipelineStage[], author = ""): Promise<Pi
         },
         {
             $project: {
-                _id: 0,
+                _id: new Types.ObjectId().valueOf(),
                 name: "$_id",
                 books: "$books",
             },
@@ -182,7 +182,7 @@ const Categories = async (
         },
         {
             $project: {
-                _id: 0,
+                _id: new Types.ObjectId().valueOf(),
                 name: "$_id",
                 books: "$books",
             },

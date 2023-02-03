@@ -21,6 +21,7 @@ export const StyledPage = styled.div`
         font-size: 30px;
         margin-top: 20px;
         margin-left: 50px;
+        margin-bottom: 20px;
     }
 
     .slider {

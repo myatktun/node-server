@@ -1,11 +1,10 @@
 import { useQuery } from "react-query"
 import { StyledPage } from "./page.styles"
-import { Grid } from "../grid/grid"
+import Grid from "../grid/grid"
 import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from "@mui/icons-material"
 import { useEffect, useState } from "react"
 import CircularProgress from "@mui/material/CircularProgress"
-import Alert from "@mui/material/Alert"
-import AlertTitle from "@mui/material/AlertTitle"
+import Error from "../error/error"
 
 interface PageProps {
     title: string
@@ -54,10 +53,7 @@ export const Page = ({ title }: PageProps) => {
     if (error) {
         return (
             <StyledPage>
-                <Alert severity="error">
-                    <AlertTitle>Error</AlertTitle>
-                    Sorry, something went wrong.
-                </Alert>
+                <Error />
             </StyledPage>
         )
     }
@@ -65,7 +61,7 @@ export const Page = ({ title }: PageProps) => {
     return (
         <StyledPage>
             <div className="title">{title.toUpperCase()}</div>
-            <Grid title={title} data={currentData} />
+            <Grid title={title} data={currentData.results} />
             <div className="slider">
                 <ArrowBackIosOutlined
                     className="sliderArrow left"

@@ -1,19 +1,24 @@
 import { StyledGrid } from "./grid.styles"
 import Thumb from "../thumb/thumb"
+import Error from "../error/error"
 
 export interface GridProps {
     title: string
-    data: { results: Array<{ name: string }> }
+    data: Array<{ name: string }>
 }
 
 interface Item {
     name: string
 }
 
-export function Grid({ title, data }: GridProps) {
+const Grid = ({ title, data }: GridProps) => {
+    if (!data) {
+        return <Error />
+    }
+
     return (
         <StyledGrid>
-            {data.results.map((item: Item) => (
+            {data.map((item: Item) => (
                 <Thumb key={item.name} title={title} item={item} />
             ))}
         </StyledGrid>

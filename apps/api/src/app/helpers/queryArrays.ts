@@ -144,7 +144,7 @@ const Authors = async (mainQueryArray: PipelineStage[], author = ""): Promise<Pi
         {
             $group: {
                 _id: "$author",
-                books: { $addToSet: "$name" },
+                books: { $addToSet: "$_id" },
             },
         },
         {
@@ -179,7 +179,7 @@ const Categories = async (
         {
             $group: {
                 _id: "$category",
-                books: { $addToSet: "$name" },
+                books: { $addToSet: "$_id" },
             },
         },
         {
@@ -193,7 +193,7 @@ const Categories = async (
             $match: {
                 $expr: {
                     $regexFind: {
-                        input: "_id",
+                        input: "$_id",
                         regex: category,
                         options: "i",
                     },

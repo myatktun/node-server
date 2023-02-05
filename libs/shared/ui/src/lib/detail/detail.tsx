@@ -4,6 +4,7 @@ import { StyledDetail } from "./detail.styles"
 import Book from "./book/book"
 import Note from "./note/note"
 import Author from "./author/author"
+import Category from "./category/category"
 import CircularProgress from "@mui/material/CircularProgress"
 import Error from "../error/error"
 
@@ -52,12 +53,16 @@ export const Detail = () => {
     if (title === "authors") {
         return (
             <StyledDetail>
-                <Author data={data} title={title} />
+                <Author data={data} />
             </StyledDetail>
         )
     }
 
-    return <StyledDetail>{data}</StyledDetail>
+    return (
+        <StyledDetail>
+            <Category data={data} />
+        </StyledDetail>
+    )
 }
 
 export default Detail

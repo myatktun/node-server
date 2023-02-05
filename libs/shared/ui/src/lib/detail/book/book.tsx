@@ -1,7 +1,9 @@
+import { Link as RouterLink } from "react-router-dom"
 import StyledBook from "./book.styles"
 import Thumb from "../../thumb/thumb"
 import { Book as IBook, BookResponse } from "@projectx/shared/interface"
 import { Carousel } from "../../carousel/carousel"
+import Link from "@mui/material/Link"
 
 interface BookProps {
     data: BookResponse
@@ -42,8 +44,20 @@ const Info = ({ data, title }: InfoProps) => {
                     <li className="title">{data.name}</li>
                 )}
                 <ul>
-                    <li>Author: {data.author}</li>
-                    <li>Category: {data.category}</li>
+                    <li>
+                        Author:
+                        <Link component={RouterLink} to={`/authors/${data.author}`}>
+                            {" "}
+                            {data.author}
+                        </Link>
+                    </li>
+                    <li>
+                        Category:
+                        <Link component={RouterLink} to={`/categories/${data.category}`}>
+                            {" "}
+                            {data.category}
+                        </Link>
+                    </li>
                     <li>Status: {data.status}</li>
                 </ul>
             </div>

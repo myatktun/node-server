@@ -11,7 +11,7 @@ interface AuthorProps {
     data: AuthorResponse
 }
 
-const StyledAuthor = styled.div`
+const StyledCategory = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,7 +23,7 @@ const StyledAuthor = styled.div`
     }
 `
 
-const Author = ({ data }: AuthorProps) => {
+const Category = ({ data }: AuthorProps) => {
     const fetchData = async (book: string) => {
         const res = await fetch(`${process.env.NX_API_URL}/books/${book}`)
         return res.json()
@@ -40,21 +40,21 @@ const Author = ({ data }: AuthorProps) => {
 
     if (all.some((e) => e.isLoading))
         return (
-            <StyledAuthor>
+            <StyledCategory>
                 <CircularProgress />
-            </StyledAuthor>
+            </StyledCategory>
         )
 
     if (all.some((e) => e.error)) {
         return (
-            <StyledAuthor>
+            <StyledCategory>
                 <Error />
-            </StyledAuthor>
+            </StyledCategory>
         )
     }
 
     return (
-        <StyledAuthor>
+        <StyledCategory>
             <Typography
                 align="center"
                 variant="h2"
@@ -83,8 +83,8 @@ const Author = ({ data }: AuthorProps) => {
                     </Grid>
                 ))}
             </Grid>
-        </StyledAuthor>
+        </StyledCategory>
     )
 }
 
-export default Author
+export default Category

@@ -12,7 +12,7 @@ export interface Book {
 export interface Author {
     _id: string
     name: string
-    books: [{ _id: string; name: string }]
+    books: [string]
 }
 
 export interface Note {

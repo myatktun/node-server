@@ -1,18 +1,24 @@
 import { useQuery } from "react-query"
+import { useLocation } from "react-router-dom"
+import { useEffect, useState } from "react"
 import { StyledPage } from "./page.styles"
 import Grid from "../grid/grid"
-import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from "@mui/icons-material"
-import { useEffect, useState } from "react"
-import CircularProgress from "@mui/material/CircularProgress"
 import Error from "../error/error"
+import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from "@mui/icons-material"
+import CircularProgress from "@mui/material/CircularProgress"
 
 interface PageProps {
     title: string
 }
 
 export const Page = ({ title }: PageProps) => {
+    const location = useLocation()
     const [currentPage, setCurrentPage] = useState(1)
     const [currentData, setCurrentData] = useState({ results: [{ name: "", olid: "unknown" }] })
+
+    if (location.state) {
+        console.log(location.state.searchValue)
+    }
 
     const fetchData = async () => {
         const res = await fetch(

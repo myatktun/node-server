@@ -16,7 +16,7 @@ const booksMainQuery = async (
                 {
                     $expr: {
                         $regexFind: {
-                            input: "$book",
+                            input: "$name",
                             regex: search,
                             options: "i",
                         },

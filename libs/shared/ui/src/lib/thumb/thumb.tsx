@@ -7,7 +7,7 @@ interface ThumbProps {
 }
 
 const Thumb = ({ title, item }: ThumbProps) => {
-    if (title.toLowerCase().includes("books")) {
+    if (item.olid) {
         return (
             <StyledSharedUiThumb className="listItem">
                 <RouterLink to={`/books/${item._id}`} style={{ textDecoration: "none" }}>

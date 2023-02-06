@@ -1,9 +1,10 @@
 import styled from "styled-components"
 
 const StyledNote = styled.div`
-    padding: 20px;
+    padding: 3rem;
     background-color: #282828;
     font-size: 1.2rem;
+    word-wrap: break-word;
 
     a {
         color: inherit;
@@ -47,6 +48,7 @@ const StyledNote = styled.div`
 
     code {
         font-size: 1rem;
+        word-wrap: break-word;
     }
 
     .hljs {

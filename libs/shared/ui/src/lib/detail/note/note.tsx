@@ -7,7 +7,11 @@ interface NoteProps {
 }
 
 export function Note({ data }: NoteProps) {
-    return <StyledNote dangerouslySetInnerHTML={{ __html: data.results }}></StyledNote>
+    return (
+        <StyledNote>
+            <div dangerouslySetInnerHTML={{ __html: data.results }}></div>
+        </StyledNote>
+    )
 }
 
 export default Note

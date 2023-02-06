@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { styled, alpha } from "@mui/material/styles"
 import InputBase from "@mui/material/InputBase"
 import SearchIcon from "@mui/icons-material/Search"
@@ -6,12 +7,26 @@ import SearchIcon from "@mui/icons-material/Search"
 export interface SearchBarProps {}
 
 const SearchBar = () => {
+    const navigate = useNavigate()
+
+    const search = (e: React.KeyboardEvent) => {
+        if (e.key === "Enter") {
+            const event = e.target as HTMLInputElement
+            navigate("/books", { state: { searchValue: event.value } })
+            event.value = ""
+        }
+    }
+
     return (
         <Search>
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
+            <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                onKeyDown={(e) => search(e)}
+            />
         </Search>
     )
 }

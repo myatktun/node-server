@@ -19,6 +19,7 @@ export function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<Home titles={["Books", "Notes"]} />} />
+                <Route path="/home" element={<Home titles={["Books", "Notes"]} />} />
                 <Route path="/books" element={<Page title={"books"} key="books" />} />
                 <Route path="/notes" element={<Page title={"notes"} key="notes" />} />
                 <Route path="/authors" element={<Page title={"authors"} key="authors" />} />
@@ -26,6 +27,7 @@ export function App() {
                     path="/categories"
                     element={<Page title={"categories"} key="categories" />}
                 />
+                <Route path="/search" element={<Page title={"Search"} key="search" />} />
                 <Route path="/:title/:id" element={<Detail />} />
             </Routes>
             <Footer />

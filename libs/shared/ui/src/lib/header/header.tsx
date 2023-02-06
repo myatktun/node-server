@@ -13,14 +13,14 @@ import useMediaQuery from "@mui/material/useMediaQuery"
 import useTheme from "@mui/material/styles/useTheme"
 
 /* eslint-disable-next-line */
-export interface SharedUiHeaderProps {}
+export interface SharedUiHeaderProps { }
 
 export const Header = () => {
     const [tab, setTab] = useState<number | boolean>(1)
     const { pathname } = useLocation()
     const isMatch = useMediaQuery(useTheme().breakpoints.down("md"))
 
-    const changeTab = (e: React.SyntheticEvent, value: number) => {
+    const changeTab = (_: React.SyntheticEvent, value: number) => {
         setTab(value)
     }
 

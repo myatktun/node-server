@@ -4,7 +4,7 @@ import InputBase from "@mui/material/InputBase"
 import SearchIcon from "@mui/icons-material/Search"
 
 /* eslint-disable-next-line */
-export interface SearchBarProps {}
+export interface SearchBarProps { }
 
 const SearchBar = () => {
     const navigate = useNavigate()
@@ -12,7 +12,7 @@ const SearchBar = () => {
     const search = (e: React.KeyboardEvent) => {
         if (e.key === "Enter") {
             const event = e.target as HTMLInputElement
-            navigate("/books", { state: { searchValue: event.value } })
+            navigate("/search", { state: { searchValue: event.value } })
             event.value = ""
         }
     }

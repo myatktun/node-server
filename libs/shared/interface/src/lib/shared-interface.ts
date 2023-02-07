@@ -1,5 +1,5 @@
 export interface Book {
-    _id: string
+    _id?: string
     name: string
     author: string
     isbn: number
@@ -10,13 +10,13 @@ export interface Book {
 }
 
 export interface Author {
-    _id: string
+    _id?: string
     name: string
     books: [string]
 }
 
 export interface Note {
-    _id: string
+    _id?: string
     name: string
     category: string
     dateAdded: string

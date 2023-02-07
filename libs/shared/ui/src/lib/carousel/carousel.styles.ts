@@ -40,7 +40,7 @@ export const StyledSharedUiCarousel = styled.div`
 
     .slider .listItem {
         margin-left: 2rem;
-        width: calc(100% / 6);
+        width: calc(100% / 7);
     }
 
     .slider .listItem:first-child {
@@ -59,21 +59,19 @@ export const StyledSharedUiCarousel = styled.div`
         color: #458588;
     }
 
-    @media screen and (max-width: 1400px) {
+    @media screen and (max-width: 1200px) {
         .title {
             margin-left: 10px;
         }
-    }
 
-    @media screen and (max-width: 1100px) {
-        .wrapper .slider {
-            height: 200px;
+        .slider .listItem {
+            width: calc(100% / 6);
         }
     }
 
     @media screen and (max-width: 850px) {
         .slider .listItem {
-            width: calc(100% / 4);
+            width: calc(100% / 5);
         }
     }
 

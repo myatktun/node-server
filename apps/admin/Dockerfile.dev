@@ -1,0 +1,8 @@
+FROM node:18.14.0-alpine
+
+WORKDIR /usr/src/app
+
+COPY ./package.json yarn.lock nx.json tsconfig.base.json babel.config.json ./
+
+CMD yarn install && \
+    yarn start admin --host 0.0.0.0 --port $PORT

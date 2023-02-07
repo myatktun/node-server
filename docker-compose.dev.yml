@@ -17,6 +17,22 @@ services:
       - ./apps/user/.env.docker
     restart: "on-failure"
 
+  admin:
+    image: admin:latest
+    build:
+      context: .
+      dockerfile: ./apps/admin/Dockerfile.dev
+    container_name: admin
+    ports:
+      - "5100:80"
+    volumes:
+      - ./node_modules:/usr/src/app/node_modules
+      - ./apps/admin:/usr/src/app/apps/admin:z
+      - ./libs:/usr/src/app/libs:z
+    env_file:
+      - ./apps/admin/.env.docker
+    restart: "on-failure"
+
   api:
     image: api:latest
     build:

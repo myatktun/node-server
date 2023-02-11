@@ -1,7 +1,7 @@
-import { List, Datagrid, TextField } from "react-admin"
+import { List, Datagrid, TextField, SearchInput } from "react-admin"
 
 export const NoteList = () => (
-    <List>
+    <List filters={noteFilters}>
         <Datagrid rowClick="edit">
             <TextField source="name" />
             <TextField source="category" />
@@ -9,5 +9,7 @@ export const NoteList = () => (
         </Datagrid>
     </List>
 )
+
+const noteFilters = [<SearchInput source="name" alwaysOn />]
 
 export default NoteList

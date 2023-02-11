@@ -1,12 +1,27 @@
-import { List, Datagrid, TextField } from "react-admin"
+import { List, Datagrid, TextField, ArrayField, SearchInput, useRecordContext } from "react-admin"
 
 export const CategoryList = () => (
-    <List>
+    <List filters={categoryFilters}>
         <Datagrid rowClick="edit">
             <TextField source="name" />
-            <TextField source="books" />
+            <ArrayField source="books">
+                <MyArrayField />
+            </ArrayField>
         </Datagrid>
     </List>
 )
+
+const MyArrayField = () => {
+    const record = useRecordContext()
+    return record.books.map((book: string) => (
+        <ul key={`${book}`}>
+            <li key={`${book}`}>
+                <a href={`/books/${book}`}>{book}</a>
+            </li>
+        </ul>
+    ))
+}
+
+const categoryFilters = [<SearchInput source="name" alwaysOn />]
 
 export default CategoryList

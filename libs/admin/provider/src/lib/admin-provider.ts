@@ -1,6 +1,5 @@
 import { fetchUtils } from "react-admin"
 import queryString from "query-string"
-import { Book } from "@projectx/shared/interface"
 
 const apiUrl = "http://localhost:5002/v1"
 const httpClient = fetchUtils.fetchJson
@@ -9,12 +8,14 @@ interface Params {
     pagination: { page: number; perPage: number }
     sort: { field: string; order: string }
     id: string
+    data: { id: string }
+    filter: { name: string }
 }
 
-const formatData = (data: [Book]) => {
-    data.forEach((book) => {
-        Object.assign(book, { id: book._id })["_id"]
-        delete book._id
+const formatData = (data: [{ _id?: string }]) => {
+    data.forEach((item) => {
+        Object.assign(item, { id: item._id })["_id"]
+        delete item._id
     })
     return data
 }
@@ -28,6 +29,7 @@ export const dataProvider = {
             limit: perPage,
             page: page,
             sortOrder: order === "DESC" ? order : undefined,
+            search: params.filter.name,
         }
 
         const url = `${apiUrl}/${resource}?${queryString.stringify(query)}`
@@ -39,9 +41,9 @@ export const dataProvider = {
 
     getOne: async (resource: string, params: Params) => {
         const url = `${apiUrl}/${resource}/${params.id}`
-        console.log(url)
         const { json } = await httpClient(url)
-        console.log(json)
+        const data = formatData(json.results)[0]
+        return { data }
     },
 
     getMany: (resource, params) => {
@@ -71,28 +73,34 @@ export const dataProvider = {
         }))
     },
 
-    create: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}`, {
+    create: async (resource, params) => {
+        const { json } = await httpClient(`${apiUrl}/${resource}`, {
             method: "POST",
             body: JSON.stringify(params.data),
-        }).then(({ json }) => ({
+        })
+        return {
             data: { ...params.data, id: json.id },
-        })),
+        }
+    },
 
-    update: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`, {
-            method: "PUT",
+    update: async (resource: string, params: Params) => {
+        const { json } = await httpClient(`${apiUrl}/${resource}`, {
+            method: "POST",
+            headers: new Headers({ authorization: "token" }),
             body: JSON.stringify(params.data),
-        }).then(({ json }) => ({ data: json })),
+        })
+        return { data: json }
+    },
 
-    updateMany: (resource, params) => {
+    updateMany: async (resource, params) => {
         const query = {
             filter: JSON.stringify({ id: params.ids }),
         }
-        return httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
+        const { json } = await httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
             method: "PUT",
             body: JSON.stringify(params.data),
-        }).then(({ json }) => ({ data: json }))
+        })
+        return { data: json }
     },
 
     delete: (resource, params) =>
@@ -100,13 +108,14 @@ export const dataProvider = {
             method: "DELETE",
         }).then(({ json }) => ({ data: json })),
 
-    deleteMany: (resource, params) => {
+    deleteMany: async (resource, params) => {
         const query = {
             filter: JSON.stringify({ id: params.ids }),
         }
-        return httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
+        const { json } = await httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
             method: "DELETE",
             body: JSON.stringify(params.data),
-        }).then(({ json }) => ({ data: json }))
+        })
+        return { data: json }
     },
 }

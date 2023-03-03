@@ -46,34 +46,40 @@ export const dataProvider = {
         return { data }
     },
 
-    getMany: (resource, params) => {
+    // not finished
+    getMany: async (resource: string, params: Params) => {
         const query = {
-            filter: JSON.stringify({ ids: params.ids }),
+            filter: JSON.stringify({ ids: params }),
         }
-        const url = `${apiUrl}/${resource}?${stringify(query)}`
-        return httpClient(url).then(({ json }) => ({ data: json }))
+        const url = `${apiUrl}/${resource}?${queryString.stringify(query)}`
+        const { json } = await httpClient(url)
+        return { data: json }
     },
 
-    getManyReference: (resource, params) => {
+    // not finished
+    getManyReference: async (resource: string, params: Params) => {
         const { page, perPage } = params.pagination
         const { field, order } = params.sort
         const query = {
             sort: JSON.stringify([field, order]),
             range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-            filter: JSON.stringify({
-                ...params.filter,
-                [params.target]: params.id,
-            }),
+            // filter: JSON.stringify({
+            //     ...params.filter,
+            //     [params.target]: params.id,
+            // }),
         }
-        const url = `${apiUrl}/${resource}?${stringify(query)}`
+        const url = `${apiUrl}/${resource}?${queryString.stringify(query)}`
 
-        return httpClient(url).then(({ headers, json }) => ({
+        const { headers, json } = await httpClient(url)
+        return {
             data: json,
-            total: parseInt(headers.get("content-range").split("/").pop(), 10),
-        }))
+            // total: parseInt(headers.get("content-range").split("/").pop(), 10),
+            total: JSON.stringify(headers),
+        }
     },
 
-    create: async (resource, params) => {
+    // not finished
+    create: async (resource: string, params: Params) => {
         const { json } = await httpClient(`${apiUrl}/${resource}`, {
             method: "POST",
             body: JSON.stringify(params.data),
@@ -84,35 +90,40 @@ export const dataProvider = {
     },
 
     update: async (resource: string, params: Params) => {
+        const token = localStorage.getItem("token")
         const { json } = await httpClient(`${apiUrl}/${resource}`, {
             method: "POST",
-            headers: new Headers({ authorization: "token" }),
-            body: JSON.stringify(params.data),
+            headers: new Headers({ authorization: `Bearer ${token}` }),
+            body: JSON.stringify([params.data]),
         })
+        json.id = 1
         return { data: json }
     },
 
-    updateMany: async (resource, params) => {
+    // not finished
+    updateMany: async (resource: string, params: Params) => {
         const query = {
-            filter: JSON.stringify({ id: params.ids }),
+            filter: JSON.stringify({ id: params }),
         }
-        const { json } = await httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
+        const { json } = await httpClient(`${apiUrl}/${resource}?${queryString.stringify(query)}`, {
             method: "PUT",
             body: JSON.stringify(params.data),
         })
         return { data: json }
     },
 
-    delete: (resource, params) =>
+    // not finished
+    delete: (resource: string, params: Params) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: "DELETE",
         }).then(({ json }) => ({ data: json })),
 
-    deleteMany: async (resource, params) => {
+    // not finished
+    deleteMany: async (resource: string, params: Params) => {
         const query = {
-            filter: JSON.stringify({ id: params.ids }),
+            filter: JSON.stringify({ id: params }),
         }
-        const { json } = await httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
+        const { json } = await httpClient(`${apiUrl}/${resource}?${queryString.stringify(query)}`, {
             method: "DELETE",
             body: JSON.stringify(params.data),
         })

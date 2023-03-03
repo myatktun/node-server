@@ -1,1 +1,2 @@
-export * from "./lib/admin-provider"
+export * from "./lib/authprovider/authprovider"
+export * from "./lib/dataprovider/dataprovider"

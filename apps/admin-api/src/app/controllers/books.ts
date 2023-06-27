@@ -19,7 +19,6 @@ export const addBooks = async (req: Request, res: Response): Promise<Response> =
         }
         return res.status(404).send({ msg: "Invalid data provided" })
     } catch (error) {
-        console.log("here")
         console.log(error)
         return res.status(404).send({ msg: "Invalid data provided" })
     }

@@ -23,7 +23,9 @@ export const Page = ({ title }: PageProps) => {
         if (location.state) {
             const { searchTitle, searchValue } = location.state
             const res = await fetch(
-                `${process.env.NX_API_URL}/${searchTitle}?search=${searchValue}&sort=dateAdded&page=${currentPage}`
+                `${process.env.NX_API_URL}/${searchTitle}?search=${encodeURIComponent(
+                    searchValue
+                )}&sort=dateAdded&page=${currentPage}`
             )
             return res.json()
         }
@@ -34,7 +36,7 @@ export const Page = ({ title }: PageProps) => {
         return res.json()
     }
 
-    const { isLoading, error, data, refetch } = useQuery(
+    const { isLoading, error, data } = useQuery(
         [`${title.toLowerCase()}Data`, currentPage],
         fetchData
     )
@@ -48,11 +50,10 @@ export const Page = ({ title }: PageProps) => {
     }
 
     useEffect(() => {
-        refetch()
         if (data) {
             setCurrentData(data)
         }
-    }, [currentPage, currentData, data, location.state, refetch])
+    }, [currentPage, currentData, data, location.state])
 
     if (isLoading) {
         return (

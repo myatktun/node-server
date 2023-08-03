@@ -31,12 +31,14 @@ export const Page = ({ title }: PageProps) => {
         }
 
         const res = await fetch(
-            `${process.env.NX_API_URL}/${title.toLowerCase()}?sort=dateAdded&page=${currentPage}`
+            `${process.env.NX_API_URL}/${title.toLowerCase()}?sort=${
+                title === "books" ? "dateAdded" : "_id"
+            }&page=${currentPage}`
         )
         return res.json()
     }
 
-    const { isLoading, error, data } = useQuery(
+    const { isLoading, error, data, refetch } = useQuery(
         [`${title.toLowerCase()}Data`, currentPage],
         fetchData
     )
@@ -50,10 +52,11 @@ export const Page = ({ title }: PageProps) => {
     }
 
     useEffect(() => {
+        refetch()
         if (data) {
             setCurrentData(data)
         }
-    }, [currentPage, currentData, data, location.state])
+    }, [currentPage, currentData, data, location.state, refetch])
 
     if (isLoading) {
         return (
